@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
-  <title>Muhammad Fatih | Profile</title>
+  <title>Muhammad Fatih</title>
   <meta name="description" content="Software Engineering Student, Leadership Enthusiast, Pageant Person, and Public Speaker." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -128,26 +128,70 @@
     .hero-pill{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.04em;color:var(--muted);border:1px solid var(--border);padding:0.3rem 0.7rem;border-radius:9999px;background:rgba(128,128,160,0.04);transition:all 0.2s ease;cursor:default}
     .hero-pill:hover{border-color:rgba(128,128,160,0.25);color:var(--chrome);background:var(--chrome-dim)}
     .hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;opacity:0;animation:fadeUp 0.8s ease 1.65s forwards}
+
     .btn-primary{display:inline-flex;align-items:center;gap:0.45rem;background:var(--text);color:var(--base);font-family:'Inter',sans-serif;font-weight:600;font-size:0.85rem;padding:0.8rem 1.6rem;border-radius:9999px;text-decoration:none;position:relative;overflow:hidden;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1)}
     .btn-primary:hover{transform:scale(1.04) translateY(-2px);box-shadow:0 10px 30px rgba(128,128,160,0.15)}
     .btn-primary:active{transform:scale(0.98)}
     .btn-secondary{display:inline-flex;align-items:center;gap:0.45rem;background:transparent;color:var(--text);font-family:'Inter',sans-serif;font-weight:500;font-size:0.85rem;padding:0.8rem 1.6rem;border-radius:9999px;border:1px solid var(--border);text-decoration:none;transition:all 0.25s ease}
     .btn-secondary:hover{border-color:var(--border-h);background:rgba(128,128,160,0.04)}
     .btn-secondary:active{transform:scale(0.98)}
+    .btn-cv{display:inline-flex;align-items:center;gap:0.45rem;background:transparent;color:var(--chrome);font-family:'Inter',sans-serif;font-weight:500;font-size:0.85rem;padding:0.8rem 1.6rem;border-radius:9999px;border:1px solid rgba(128,128,160,0.25);text-decoration:none;transition:all 0.25s ease}
+    .btn-cv:hover{border-color:var(--chrome);background:var(--chrome-dim);color:var(--text)}
+    .btn-cv:active{transform:scale(0.98)}
+    .btn-cv svg{flex-shrink:0}
+
     .scroll-hint{position:absolute;bottom:5.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.4rem;opacity:0;animation:fadeUp 0.8s ease 2.2s forwards}
     .scroll-hint span{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted-2)}
     .scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--muted-2),transparent);animation:scrollDrop 1.5s ease infinite}
     @keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top;opacity:1}50%{transform:scaleY(1);transform-origin:top;opacity:1}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
 
     /* ===== MARQUEE ===== */
-    .marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0.85rem 0;overflow:hidden;white-space:nowrap;background:var(--surface);padding-bottom: 1.3rem;}
-    .marquee-track{display:inline-flex;animation:marqueeScroll 40s linear infinite}
+    .marquee-wrap{
+      position:relative;
+      padding:1.1rem 0;
+      overflow:hidden;
+      white-space:nowrap;
+      background:linear-gradient(90deg,var(--surface) 0%,var(--surface-2) 50%,var(--surface) 100%);
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+    }
+    .marquee-wrap::before{
+      content:'';position:absolute;inset:0;
+      background:
+        linear-gradient(90deg,var(--base) 0%,transparent 12%,transparent 88%,var(--base) 100%),
+        linear-gradient(180deg,rgba(176,176,196,0.04) 0%,transparent 40%,transparent 60%,rgba(77,138,255,0.03) 100%);
+      pointer-events:none;z-index:2;
+    }
+    .marquee-wrap::after{
+      content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent 5%,var(--chrome) 30%,var(--blue) 50%,var(--chrome) 70%,transparent 95%);
+      opacity:0.25;z-index:3;
+    }
+    .marquee-track{display:inline-flex;animation:marqueeScroll 50s linear infinite}
     .marquee-track:hover{animation-play-state:paused}
-    .marquee-item{display:inline-flex;align-items:center;gap:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);padding:0 1.5rem;flex-shrink:0}
-    .marquee-item .m-dot{width:4px;height:4px;border-radius:50%;background:var(--chrome);opacity:0.5}
+    .marquee-item{
+      display:inline-flex;align-items:center;gap:0.6rem;
+      font-family:'JetBrains Mono',monospace;font-size:0.62rem;
+      letter-spacing:0.1em;text-transform:uppercase;
+      color:var(--muted-2);padding:0 1.6rem;flex-shrink:0;
+      transition:color 0.3s ease;
+    }
+    .marquee-item:hover{color:var(--chrome)}
+    .marquee-item .m-dot{
+      width:4px;height:4px;border-radius:50%;flex-shrink:0;
+      background:var(--chrome);opacity:0.35;
+      box-shadow:0 0 6px rgba(176,176,196,0.3);
+      animation:dotPulse 2.5s ease-in-out infinite;
+    }
+    .marquee-item:nth-child(even) .m-dot{animation-delay:1.2s}
+    .marquee-item:nth-child(3n) .m-dot{background:var(--blue);box-shadow:0 0 6px rgba(77,138,255,0.3);animation-delay:0.6s}
+    @keyframes dotPulse{
+      0%,100%{opacity:0.2;transform:scale(0.8)}
+      50%{opacity:0.7;transform:scale(1.3)}
+    }
     @keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* ===== SECTIONS COMMON ===== */
+    /* ===== SECTIONS ===== */
     .section-wrap{max-width:1100px;margin:0 auto;padding:4rem 1rem}
     .section-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--chrome);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem}
     .section-eyebrow::after{content:'';display:block;width:32px;height:1px;background:var(--chrome);opacity:0.4}
@@ -171,7 +215,7 @@
     .stat-label{font-size:0.62rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;color:var(--muted-2);text-transform:uppercase;margin-bottom:0.2rem}
     .stat-value{font-size:0.82rem;font-weight:600;color:var(--text);line-height:1.4}
 
-    /* ===== HIGHLIGHT NUMBERS ===== */
+    /* ===== NUMBERS ===== */
     .numbers-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
     .numbers-grid{max-width:900px;margin:0 auto;padding:3.5rem 1rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
     .number-item{text-align:center}
@@ -179,7 +223,7 @@
     .number-val .num-chrome{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .number-label{font-size:0.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-2)}
 
-    /* ===== TITLES & ACHIEVEMENTS ===== */
+    /* ===== TITLES ===== */
     .titles-scroll{display:flex;gap:0.75rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:0.75rem;scrollbar-width:none}
     .titles-scroll::-webkit-scrollbar{display:none}
     .title-card{flex:0 0 280px;scroll-snap-align:start;background:var(--surface);border:1px solid var(--border);border-radius:1.25rem;padding:1.4rem;position:relative;overflow:hidden;transition:all 0.3s ease}
@@ -191,7 +235,7 @@
     .title-org{font-size:0.75rem;color:var(--muted);line-height:1.5}
     .title-badge{display:inline-block;margin-top:0.75rem;font-size:0.55rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:9999px;border:1px solid var(--border);color:var(--chrome);background:var(--chrome-dim)}
 
-    /* ===== JOURNEY BENTO ===== */
+    /* ===== JOURNEY ===== */
     .bento{display:grid;grid-template-columns:1fr;gap:0.75rem}
     .bento-card{background:var(--surface);border:1px solid var(--border);border-radius:1.25rem;padding:1.5rem;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.25,1,0.5,1);display:flex;flex-direction:column;justify-content:flex-end}
     .bento-card::before{content:'';position:absolute;inset:0;background:var(--card-over);pointer-events:none}
@@ -219,7 +263,7 @@
     .skill-tag{font-size:0.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.02em;color:var(--muted);border:1px solid var(--border);padding:0.3rem 0.65rem;border-radius:8px;background:rgba(128,128,160,0.03);transition:all 0.2s ease;cursor:default}
     .skill-tag:hover{border-color:rgba(128,128,160,0.25);color:var(--chrome);background:var(--chrome-dim)}
 
-    /* ===== PHILOSOPHY ===== */
+    /* ===== VALUES ===== */
     .values-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:4rem 1rem}
     .values-inner{max-width:720px;margin:0 auto;text-align:center}
     .quote-mark{font-family:'Space Grotesk',sans-serif;font-size:5rem;line-height:0.5;color:var(--chrome);opacity:0.2;margin-bottom:1.25rem;display:block}
@@ -247,6 +291,23 @@
 
     .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s cubic-bezier(0.2,0.8,0.2,1),transform 0.7s cubic-bezier(0.2,0.8,0.2,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* ===== TOAST ===== */
+    .toast{
+      position:fixed;top:1rem;left:50%;transform:translateX(-50%) translateY(-20px);
+      z-index:10002;
+      background:var(--surface-2);border:1px solid var(--border);
+      backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+      color:var(--text);font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:500;
+      padding:0.6rem 1.2rem;border-radius:10px;
+      box-shadow:0 8px 30px var(--dock-glow);
+      opacity:0;pointer-events:none;
+      transition:all 0.35s cubic-bezier(0.25,1,0.5,1);
+      display:flex;align-items:center;gap:0.5rem;
+      white-space:nowrap;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+    .toast svg{flex-shrink:0;color:var(--chrome)}
 
     /* ===== RESPONSIVE TABLET ===== */
     @media(min-width:640px){
@@ -290,6 +351,12 @@
 </head>
 <body>
 
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+    <span id="toastMsg">Downloading CV...</span>
+  </div>
+
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <!-- DOCK -->
@@ -297,8 +364,8 @@
     <div class="music-panel" id="musicPanel">
       <div class="music-panel-header">
         <div class="music-panel-info">
-          <div class="music-panel-track" id="panelTrack">Inspiring Technology</div>
-          <div class="music-panel-artist" id="panelArtist">FRUITYAUDIO</div>
+          <div class="music-panel-track" id="panelTrack">soundtrack</div>
+          <div class="music-panel-artist" id="panelArtist">Muhammad Fatih</div>
         </div>
         <button class="music-play-btn" id="musicPlayBtn" aria-label="Play / Pause">
           <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
@@ -321,6 +388,7 @@
       <div class="dock-sep" aria-hidden="true"></div>
       <a href="#connect" class="dock-link" data-label="Connect" aria-label="Connect"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
       <div class="dock-sep" aria-hidden="true"></div>
+      <a href="/cv-muhammad-fatih.pdf" download class="dock-link" id="dockCv" data-label="Download CV" aria-label="Download CV"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></a>
       <button class="dock-link" id="dockMusic" data-label="Music" aria-label="Toggle music panel"><div class="vis-mini" id="visMini"><div class="vis-mini-bar"></div><div class="vis-mini-bar"></div><div class="vis-mini-bar"></div></div></button>
       <button class="dock-link" id="dockTheme" data-label="Theme" aria-label="Toggle theme">
         <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -335,7 +403,7 @@
 
   <main>
 
-    <!-- ====== HERO ====== -->
+    <!-- HERO -->
     <section id="home" class="hero">
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="orb orb-chrome" aria-hidden="true"></div>
@@ -356,7 +424,7 @@
       </h1>
       <p class="hero-sub">Membangun sistem melalui teknologi, berdampak melalui komunikasi dan kepemimpinan.</p>
       <div class="hero-pills" aria-label="Roles">
-        <span class="hero-pill">Software Engineering & Education</span>
+        <span class="hero-pill">Software Engineering</span>
         <span class="hero-pill">Artificial Intelligence</span>
         <span class="hero-pill">Public Speaker</span>
         <span class="hero-pill">Leadership</span>
@@ -364,11 +432,15 @@
       </div>
       <div class="hero-cta">
         <a href="https://portfolio-fatih-fawn.vercel.app" target="_blank" rel="noopener" class="btn-primary">Lihat Portfolio <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        <a href="/cv-muhammad-fatih.pdf" download id="heroCvBtn" class="btn-cv">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          Download CV
+        </a>
         <a href="#about" class="btn-secondary">Kenali Lebih Jauh</a>
       </div>
     </section>
 
-    <!-- ====== MARQUEE ====== -->
+    <!-- MARQUEE -->
     <div class="marquee-wrap" aria-hidden="true">
       <div class="marquee-track">
         <span class="marquee-item"><span class="m-dot"></span>Software Engineering</span>
@@ -381,7 +453,6 @@
         <span class="marquee-item"><span class="m-dot"></span>Youth Development</span>
         <span class="marquee-item"><span class="m-dot"></span>Education</span>
         <span class="marquee-item"><span class="m-dot"></span>Cultural Advocacy</span>
-        <!-- duplikat untuk seamless loop -->
         <span class="marquee-item"><span class="m-dot"></span>Software Engineering</span>
         <span class="marquee-item"><span class="m-dot"></span>Artificial Intelligence</span>
         <span class="marquee-item"><span class="m-dot"></span>Public Speaking</span>
@@ -395,7 +466,7 @@
       </div>
     </div>
 
-    <!-- ====== ABOUT ====== -->
+    <!-- ABOUT -->
     <section id="about">
       <div class="section-wrap">
         <div class="about-grid">
@@ -408,52 +479,36 @@
           <div class="about-stats reveal" style="transition-delay:0.12s">
             <div class="stat-card chrome">
               <div class="stat-icon chrome"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-              <div class="stat-label">Focus</div>
-              <div class="stat-value">Software Engineering & Education</div>
+              <div class="stat-label">Focus</div><div class="stat-value">Software Engineering & AI</div>
             </div>
             <div class="stat-card white">
               <div class="stat-icon white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg></div>
-              <div class="stat-label">Education</div>
-              <div class="stat-value">S1 Pendidikan Teknologi Informasi '25 - UNESA</div>
+              <div class="stat-label">Education</div><div class="stat-value">UNESA — Fakultas Teknik</div>
             </div>
             <div class="stat-card chrome">
               <div class="stat-icon chrome"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-              <div class="stat-label">Leadership</div>
-              <div class="stat-value">Ketua OSIS & Wakil Ketua Umum Paguyuban</div>
+              <div class="stat-label">Leadership</div><div class="stat-value">(EX) Ketua OSIS, Wakil Ketua Paguyuban</div>
             </div>
             <div class="stat-card blue">
               <div class="stat-icon blue"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></div>
-              <div class="stat-label">Communication</div>
-              <div class="stat-value">MC, Moderator, Public Speaker</div>
+              <div class="stat-label">Communication</div><div class="stat-value">MC, Moderator, Public Speaker</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ====== HIGHLIGHT NUMBERS ====== -->
+    <!-- NUMBERS -->
     <div class="numbers-section reveal">
       <div class="numbers-grid">
-        <div class="number-item">
-          <div class="number-val"><span class="num-chrome">6+</span></div>
-          <div class="number-label">Title & Gelar</div>
-        </div>
-        <div class="number-item">
-          <div class="number-val"><span class="num-chrome">4</span></div>
-          <div class="number-label">Pilar Pertumbuhan</div>
-        </div>
-        <div class="number-item">
-          <div class="number-val"><span class="num-chrome">10+</span></div>
-          <div class="number-label">Pengalaman Organisasi</div>
-        </div>
-        <div class="number-item">
-          <div class="number-val"><span class="num-chrome">3+</span></div>
-          <div class="number-label">Bidang Keahlian</div>
-        </div>
+        <div class="number-item"><div class="number-val"><span class="num-chrome">6+</span></div><div class="number-label">Title & Gelar</div></div>
+        <div class="number-item"><div class="number-val"><span class="num-chrome">4</span></div><div class="number-label">Pilar Pertumbuhan</div></div>
+        <div class="number-item"><div class="number-val"><span class="num-chrome">10+</span></div><div class="number-label">Pengalaman Organisasi</div></div>
+        <div class="number-item"><div class="number-val"><span class="num-chrome">3+</span></div><div class="number-label">Bidang Keahlian</div></div>
       </div>
     </div>
 
-    <!-- ====== TITLES & ACHIEVEMENTS ====== -->
+    <!-- TITLES -->
     <section id="titles">
       <div class="section-wrap">
         <div class="reveal">
@@ -462,47 +517,17 @@
           <p class="section-desc" style="margin-bottom:2rem">Setiap title yang saya sandang bukan sekadar penghargaan — melainkan tanggung jawab untuk terus berdampak.</p>
         </div>
         <div class="titles-scroll reveal" style="transition-delay:0.1s">
-          <div class="title-card">
-            <div class="title-year">2025</div>
-            <div class="title-name">RU-1 & Wakil Ketua Umum Paguyuban</div>
-            <div class="title-org">Mbak Mas Fakultas Teknik, Universitas Negeri Surabaya</div>
-            <span class="title-badge">Organisasi</span>
-          </div>
-          <div class="title-card">
-            <div class="title-year">2026</div>
-            <div class="title-name">Juara Intelegensia - Putera Batik Surabaya 2026</div>
-            <div class="title-org">Perwakilan budaya batik Kota Surabaya</div>
-            <span class="title-badge">Pageant</span>
-          </div>
-          <div class="title-card">
-            <div class="title-year">2024</div>
-            <div class="title-name">Winner - Duta Koperasi Kabupaten Tuban 2024</div>
-            <div class="title-org">Dinas Koperasi, UMKM, dan Perdagangan Kabupaten Tuban</div>
-            <span class="title-badge">Duta</span>
-          </div>
-          <div class="title-card">
-            <div class="title-year">2026</div>
-            <div class="title-name">Duta Inspiratif Indonesia 3</div>
-            <div class="title-org">Program pengembangan pemuda inspiratif nasional</div>
-            <span class="title-badge">Duta</span>
-          </div>
-          <div class="title-card">
-            <div class="title-year">2026</div>
-            <div class="title-name">Duta Pemimpin Berkarya Nusantara 3</div>
-            <div class="title-org">Platform kepemimpinan pemuda tingkat nasional</div>
-            <span class="title-badge">Leadership</span>
-          </div>
-          <div class="title-card">
-            <div class="title-year">2023</div>
-            <div class="title-name">Ketua Umum OSIS</div>
-            <div class="title-org">SMKN Palang, Kabupaten Tuban</div>
-            <span class="title-badge">Organisasi</span>
-          </div>
+          <div class="title-card"><div class="title-year">2026</div><div class="title-name">Wakil Ketua Umum Paguyuban Mbak Mas</div><div class="title-org">Fakultas Teknik, Universitas Negeri Surabaya</div><span class="title-badge">Organisasi</span></div>
+          <div class="title-card"><div class="title-year">2026</div><div class="title-name">Putera Batik Surabaya</div><div class="title-org">Perwakilan budaya batik kota Surabaya</div><span class="title-badge">Pageant</span></div>
+          <div class="title-card"><div class="title-year">2024</div><div class="title-name">Duta Koperasi Kabupaten Tuban</div><div class="title-org">Dinas Koperasi dan UMKM Kabupaten Tuban</div><span class="title-badge">Duta</span></div>
+          <div class="title-card"><div class="title-year">2024</div><div class="title-name">Duta Inspiratif Indonesia 3</div><div class="title-org">Program pengembangan pemuda inspiratif nasional</div><span class="title-badge">Duta</span></div>
+          <div class="title-card"><div class="title-year">2024</div><div class="title-name">Duta Pemimpin Berkarya Nusantara 3</div><div class="title-org">Platform kepemimpinan pemuda tingkat nasional</div><span class="title-badge">Leadership</span></div>
+          <div class="title-card"><div class="title-year">2023</div><div class="title-name">Ketua OSIS</div><div class="title-org">SMKN Palang, Kabupaten Tuban</div><span class="title-badge">Organisasi</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ====== JOURNEY ====== -->
+    <!-- JOURNEY -->
     <section id="journey">
       <div class="section-wrap">
         <div class="reveal" style="text-align:center;margin-bottom:2.5rem">
@@ -510,27 +535,15 @@
           <h2 class="section-heading" style="text-align:center">Four Pillars<br/><em style="font-style:italic;color:var(--chrome);font-weight:500">of Growth.</em></h2>
         </div>
         <div class="bento">
-          <div class="bento-card bento-wide blue-card reveal">
-            <svg class="bento-bg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            <div><span class="bento-tag blue">Software · AI · Cyber</span><div class="bento-title">Technology &<br/>Engineering</div><p class="bento-body">Fokus pada Software Development, Cyber Security, dan Artificial Intelligence — mengubah ide kompleks menjadi solusi digital inovatif yang siap bersaing di era modern.</p></div>
-          </div>
-          <div class="bento-card chrome-card reveal" style="transition-delay:0.08s">
-            <svg class="bento-bg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M2 4h20"/><path d="m2 4 4.5 16h11L22 4"/></svg>
-            <div><span class="bento-tag chrome">Culture · Advocacy</span><div class="bento-title">Pageant &<br/>Culture</div><p class="bento-body">Platform untuk membangun advokasi sosial, melestarikan budaya Indonesia, dan memberikan dampak nyata bagi masyarakat.</p></div>
-          </div>
-          <div class="bento-card reveal" style="transition-delay:0.16s">
-            <svg class="bento-bg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            <div><span class="bento-tag white">Org · Decision</span><div class="bento-title">Leadership</div><p class="bento-body">Memimpin organisasi mengajarkan bahwa leadership bukan soal posisi, melainkan keberanian mengambil keputusan dan menginspirasi.</p></div>
-          </div>
-          <div class="bento-card bento-wide reveal" style="transition-delay:0.08s">
-            <svg class="bento-bg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-            <div><span class="bento-tag chrome">MC · Moderator · Presenter</span><div class="bento-title">Public Speaking</div><p class="bento-body">Ide dan visi yang hebat memiliki dampak jauh lebih besar ketika disampaikan dengan energi, kejelasan, dan inspirasi. Saya merawat keyakinan itu di setiap panggung.</p></div>
-          </div>
+          <div class="bento-card bento-wide blue-card reveal"><svg class="bento-bg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><div><span class="bento-tag blue">Software · AI · Cyber</span><div class="bento-title">Technology &<br/>Engineering</div><p class="bento-body">Fokus pada Software Development, Cyber Security, dan Artificial Intelligence — mengubah ide kompleks menjadi solusi digital inovatif yang siap bersaing di era modern.</p></div></div>
+          <div class="bento-card chrome-card reveal" style="transition-delay:0.08s"><svg class="bento-bg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M2 4h20"/><path d="m2 4 4.5 16h11L22 4"/></svg><div><span class="bento-tag chrome">Culture · Advocacy</span><div class="bento-title">Pageant &<br/>Culture</div><p class="bento-body">Platform untuk membangun advokasi sosial, melestarikan budaya Indonesia, dan memberikan dampak nyata bagi masyarakat.</p></div></div>
+          <div class="bento-card reveal" style="transition-delay:0.16s"><svg class="bento-bg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><div><span class="bento-tag white">Org · Decision</span><div class="bento-title">Leadership</div><p class="bento-body">Menjadi Ketua OSIS dan memimpin organisasi mengajarkan bahwa leadership bukan soal posisi, melainkan keberanian mengambil keputusan dan menginspirasi.</p></div></div>
+          <div class="bento-card bento-wide reveal" style="transition-delay:0.08s"><svg class="bento-bg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg><div><span class="bento-tag chrome">MC · Moderator · Presenter</span><div class="bento-title">Public Speaking</div><p class="bento-body">Ide dan visi yang hebat memiliki dampak jauh lebih besar ketika disampaikan dengan energi, kejelasan, dan inspirasi. Saya merawat keyakinan itu di setiap panggung.</p></div></div>
         </div>
       </div>
     </section>
 
-    <!-- ====== SKILLS ====== -->
+    <!-- SKILLS -->
     <section id="skills">
       <div class="section-wrap">
         <div class="reveal" style="text-align:center;margin-bottom:2.5rem">
@@ -538,44 +551,14 @@
           <h2 class="section-heading" style="text-align:center">What I<br/><em style="font-style:italic;color:var(--chrome);font-weight:500">Bring to the Table.</em></h2>
         </div>
         <div class="skills-grid">
-          <div class="skill-group reveal">
-            <div class="skill-group-title"><span class="sg-dot c"></span>Technical</div>
-            <div class="skill-tags">
-              <span class="skill-tag">Software Engineering</span>
-              <span class="skill-tag">Artificial Intelligence</span>
-              <span class="skill-tag">Cyber Security</span>
-              <span class="skill-tag">Graphic Design</span>
-              <span class="skill-tag">Problem Solving</span>
-              <span class="skill-tag">UI/UX Basics</span>
-            </div>
-          </div>
-          <div class="skill-group reveal" style="transition-delay:0.08s">
-            <div class="skill-group-title"><span class="sg-dot b"></span>Communication</div>
-            <div class="skill-tags">
-              <span class="skill-tag">Public Speaking</span>
-              <span class="skill-tag">MC / Pembawa Acara</span>
-              <span class="skill-tag">Moderator</span>
-              <span class="skill-tag">Presentation</span>
-              <span class="skill-tag">Persuasion</span>
-              <span class="skill-tag">Copywriting</span>
-            </div>
-          </div>
-          <div class="skill-group reveal" style="transition-delay:0.16s">
-            <div class="skill-group-title"><span class="sg-dot w"></span>Leadership & Soft Skills</div>
-            <div class="skill-tags">
-              <span class="skill-tag">Organizational Management</span>
-              <span class="skill-tag">Decision Making</span>
-              <span class="skill-tag">Team Building</span>
-              <span class="skill-tag">Cultural Advocacy</span>
-              <span class="skill-tag">Event Planning</span>
-              <span class="skill-tag">Adaptability</span>
-            </div>
-          </div>
+          <div class="skill-group reveal"><div class="skill-group-title"><span class="sg-dot c"></span>Technical</div><div class="skill-tags"><span class="skill-tag">Software Engineering</span><span class="skill-tag">Artificial Intelligence</span><span class="skill-tag">Cyber Security</span><span class="skill-tag">Graphic Design</span><span class="skill-tag">Problem Solving</span><span class="skill-tag">UI/UX Basics</span></div></div>
+          <div class="skill-group reveal" style="transition-delay:0.08s"><div class="skill-group-title"><span class="sg-dot b"></span>Communication</div><div class="skill-tags"><span class="skill-tag">Public Speaking</span><span class="skill-tag">MC / Pembawa Acara</span><span class="skill-tag">Moderator</span><span class="skill-tag">Presentation</span><span class="skill-tag">Persuasion</span><span class="skill-tag">Copywriting</span></div></div>
+          <div class="skill-group reveal" style="transition-delay:0.16s"><div class="skill-group-title"><span class="sg-dot w"></span>Leadership & Soft Skills</div><div class="skill-tags"><span class="skill-tag">Organizational Mgmt</span><span class="skill-tag">Decision Making</span><span class="skill-tag">Team Building</span><span class="skill-tag">Cultural Advocacy</span><span class="skill-tag">Event Planning</span><span class="skill-tag">Adaptability</span></div></div>
         </div>
       </div>
     </section>
 
-    <!-- ====== PHILOSOPHY ====== -->
+    <!-- VALUES -->
     <div class="values-wrap">
       <div class="values-inner reveal">
         <span class="quote-mark" aria-hidden="true">"</span>
@@ -590,7 +573,7 @@
       </div>
     </div>
 
-    <!-- ====== FOOTER ====== -->
+    <!-- FOOTER -->
     <footer id="connect" class="footer">
       <div class="footer-glow" aria-hidden="true"></div>
       <div class="footer-line" aria-hidden="true"></div>
@@ -599,31 +582,49 @@
         <h2 class="footer-heading">Let's Create<span>Meaningful Impact.</span></h2>
         <p class="footer-sub">Terbuka untuk kolaborasi seputar Technology, Leadership, Public Speaking, Education, dan Youth Development.</p>
         <div class="footer-actions">
-          <a href="https://instagram.com/aftharmuhammad_" target="_blank" rel="noopener" class="btn-chrome">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-            Connect on Instagram
-          </a>
-          <a href="https://portfolio-fatih-fawn.vercel.app" target="_blank" rel="noopener" class="btn-secondary">View Portfolio</a>
+          <a href="https://instagram.com/aftharmuhammad_" target="_blank" rel="noopener" class="btn-chrome"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>Connect on Instagram</a>
+          <a href="https://fatih-porto.vercel.app" target="_blank" rel="noopener" class="btn-secondary">View Portfolio</a>
         </div>
         <p class="footer-copy">&copy; 2026 Muhammad Fatih &mdash; Engineered with Precision.</p>
       </div>
     </footer>
-
   </main>
 
   <script>
-    /* ===== SMOOTH SCROLL ===== */
+    var toastEl = document.getElementById('toast');
+    var toastMsg = document.getElementById('toastMsg');
+    var toastTimer = null;
+    function showToast(msg) {
+      if (toastTimer) clearTimeout(toastTimer);
+      toastMsg.textContent = msg;
+      toastEl.classList.add('show');
+      toastTimer = setTimeout(function() { toastEl.classList.remove('show'); }, 2500);
+    }
+
+    var CV_PATH = '/cv-muhammad-fatih.pdf';
+    function handleCvDownload(e) {
+      fetch(CV_PATH, { method: 'HEAD' }).then(function(res) {
+        if (res.ok) {
+          var a = document.createElement('a'); a.href = CV_PATH; a.download = 'CV_Muhammad_Fatih.pdf';
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          showToast('CV berhasil diunduh');
+        } else { showToast('File CV belum tersedia'); }
+      }).catch(function() {
+        var a = document.createElement('a'); a.href = CV_PATH; a.download = 'CV_Muhammad_Fatih.pdf';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        showToast('Mengunduh CV...');
+      });
+    }
+    document.getElementById('heroCvBtn').addEventListener('click', function(e) { e.preventDefault(); handleCvDownload(e); });
+    document.getElementById('dockCv').addEventListener('click', function(e) { e.preventDefault(); handleCvDownload(e); });
+
     function smoothScrollTo(targetEl){
       var targetY=targetEl.getBoundingClientRect().top+window.scrollY;
-      var startY=window.scrollY;
-      var distance=targetY-startY;
-      var duration=Math.min(900,Math.max(400,Math.abs(distance)*0.6));
-      var start=null;
+      var startY=window.scrollY;var distance=targetY-startY;
+      var duration=Math.min(900,Math.max(400,Math.abs(distance)*0.6));var start=null;
       function step(ts){
-        if(!start)start=ts;
-        var t=Math.min((ts-start)/duration,1);
-        var ease=1-Math.pow(1-t,4);
-        window.scrollTo(0,startY+distance*ease);
+        if(!start)start=ts;var t=Math.min((ts-start)/duration,1);
+        var ease=1-Math.pow(1-t,4);window.scrollTo(0,startY+distance*ease);
         if(t<1)requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
@@ -635,14 +636,12 @@
       });
     });
 
-    /* ===== SCROLL PROGRESS ===== */
     var scrollProgressEl=document.getElementById('scrollProgress');
     function updateScrollProgress(){
       var docH=document.documentElement.scrollHeight-window.innerHeight;
       scrollProgressEl.style.width=(docH>0?(window.scrollY/docH)*100:0)+'%';
     }
 
-    /* ===== BACK TO TOP ===== */
     var dockBttGroup=document.getElementById('dockBttGroup');
     var dockBtt=document.getElementById('dockBtt');
     function updateBtt(){
@@ -651,7 +650,6 @@
     }
     dockBtt.addEventListener('click',function(){smoothScrollTo(document.getElementById('home'));});
 
-    /* ===== COMBINED SCROLL ===== */
     var scrollTicking=false;
     window.addEventListener('scroll',function(){
       if(!scrollTicking){
@@ -660,7 +658,6 @@
       }
     },{passive:true});
 
-    /* ===== SCROLL REVEAL ===== */
     (function(){
       document.querySelectorAll('.bento .reveal').forEach(function(el,i){el.style.transitionDelay=(i*0.08)+'s';});
       document.querySelectorAll('.skill-group.reveal').forEach(function(el,i){el.style.transitionDelay=(i*0.08)+'s';});
@@ -672,13 +669,11 @@
       document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
     })();
 
-    /* ===== CURSOR BLINK FADE ===== */
     setTimeout(function(){
       var c=document.querySelector('.cursor');
       if(c){c.style.transition='opacity 1.2s ease';c.style.opacity='0';}
     },4500);
 
-    /* ===== DOCK ACTIVE STATE ===== */
     (function(){
       var sections=document.querySelectorAll('main section[id], footer[id]');
       var links=document.querySelectorAll('.dock-link[href]');
@@ -693,12 +688,9 @@
       sections.forEach(function(s){io.observe(s);});
     })();
 
-    /* ===== THEME TOGGLE ===== */
     (function(){
-      var html=document.documentElement;
-      var btn=document.getElementById('dockTheme');
-      var iconSun=document.getElementById('iconSun');
-      var iconMoon=document.getElementById('iconMoon');
+      var html=document.documentElement;var btn=document.getElementById('dockTheme');
+      var iconSun=document.getElementById('iconSun');var iconMoon=document.getElementById('iconMoon');
       var saved=localStorage.getItem('theme');
       if(saved==='light'){html.setAttribute('data-theme','light');}
       updateIcons();
@@ -716,83 +708,39 @@
       });
     })();
 
-    /* ===== MUSIC PLAYER ===== */
     (function(){
-      var dockMusic=document.getElementById('dockMusic');
-      var panel=document.getElementById('musicPanel');
-      var panelTrack=document.getElementById('panelTrack');
-      var panelArtist=document.getElementById('panelArtist');
-      var panelProgressWrap=document.getElementById('panelProgressWrap');
-      var panelProgressBar=document.getElementById('panelProgressBar');
-      var panelTimeCurrent=document.getElementById('panelTimeCurrent');
-      var panelTimeDuration=document.getElementById('panelTimeDuration');
-      var playBtn=document.getElementById('musicPlayBtn');
-      var iconPlay=document.getElementById('iconPlay');
-      var iconPause=document.getElementById('iconPause');
-      var visBars=document.querySelectorAll('.vis-mini-bar');
-      var audio=new Audio();
-      var isPlaying=false;
-      var panelOpen=false;
+      var dockMusic=document.getElementById('dockMusic');var panel=document.getElementById('musicPanel');
+      var panelTrack=document.getElementById('panelTrack');var panelArtist=document.getElementById('panelArtist');
+      var panelProgressWrap=document.getElementById('panelProgressWrap');var panelProgressBar=document.getElementById('panelProgressBar');
+      var panelTimeCurrent=document.getElementById('panelTimeCurrent');var panelTimeDuration=document.getElementById('panelTimeDuration');
+      var playBtn=document.getElementById('musicPlayBtn');var iconPlay=document.getElementById('iconPlay');
+      var iconPause=document.getElementById('iconPause');var visBars=document.querySelectorAll('.vis-mini-bar');
+      var audio=new Audio();var isPlaying=false;var panelOpen=false;
       function formatTime(s){
-        if(isNaN(s))return'0:00';
-        var m=Math.floor(s/60);
-        var sec=Math.floor(s%60);
+        if(isNaN(s))return'0:00';var m=Math.floor(s/60);var sec=Math.floor(s%60);
         return m+':'+(sec<10?'0':'')+sec;
       }
-      function updatePlayIcon(){
-        iconPlay.style.display=isPlaying?'none':'block';
-        iconPause.style.display=isPlaying?'block':'none';
-      }
-      function play(){
-        audio.play().then(function(){
-          isPlaying=true;visBars.forEach(function(b){b.classList.add('on');});updatePlayIcon();
-        }).catch(function(){
-          isPlaying=false;visBars.forEach(function(b){b.classList.remove('on');});updatePlayIcon();
-        });
-      }
-      function pause(){
-        audio.pause();isPlaying=false;visBars.forEach(function(b){b.classList.remove('on');});updatePlayIcon();
-      }
-      panelTrack.textContent='Inspiring Technology';
-      panelArtist.textContent='FRUITYAUDIO';
-      audio.src='/soundtrack.mp3';
-      audio.preload='metadata';
-      audio.load();
-      dockMusic.addEventListener('click',function(e){
-        e.stopPropagation();panelOpen=!panelOpen;panel.classList.toggle('open',panelOpen);
-      });
+      function updatePlayIcon(){iconPlay.style.display=isPlaying?'none':'block';iconPause.style.display=isPlaying?'block':'none';}
+      function play(){audio.play().then(function(){isPlaying=true;visBars.forEach(function(b){b.classList.add('on');});updatePlayIcon();}).catch(function(){isPlaying=false;visBars.forEach(function(b){b.classList.remove('on');});updatePlayIcon();});}
+      function pause(){audio.pause();isPlaying=false;visBars.forEach(function(b){b.classList.remove('on');});updatePlayIcon();}
+      panelTrack.textContent='soundtrack';panelArtist.textContent='Muhammad Fatih';
+      audio.src='/soundtrack.mp3';audio.preload='metadata';audio.load();
+      dockMusic.addEventListener('click',function(e){e.stopPropagation();panelOpen=!panelOpen;panel.classList.toggle('open',panelOpen);});
       playBtn.addEventListener('click',function(){if(isPlaying){pause();}else{play();}});
-      document.addEventListener('click',function(e){
-        if(panelOpen&&!document.getElementById('dockWrap').contains(e.target)){panelOpen=false;panel.classList.remove('open');}
-      });
+      document.addEventListener('click',function(e){if(panelOpen&&!document.getElementById('dockWrap').contains(e.target)){panelOpen=false;panel.classList.remove('open');}});
       panel.addEventListener('click',function(e){e.stopPropagation();});
-      audio.addEventListener('timeupdate',function(){
-        if(audio.duration){panelProgressBar.style.width=(audio.currentTime/audio.duration*100)+'%';panelTimeCurrent.textContent=formatTime(audio.currentTime);}
-      });
+      audio.addEventListener('timeupdate',function(){if(audio.duration){panelProgressBar.style.width=(audio.currentTime/audio.duration*100)+'%';panelTimeCurrent.textContent=formatTime(audio.currentTime);}});
       audio.addEventListener('loadedmetadata',function(){panelTimeDuration.textContent=formatTime(audio.duration);});
       audio.addEventListener('ended',function(){audio.currentTime=0;pause();});
-      audio.addEventListener('error',function(){
-        panelTrack.textContent='File not found';
-        panelArtist.textContent='Put soundtrack.mp3 in /public';
-        isPlaying=false;updatePlayIcon();
-      });
-      panelProgressWrap.addEventListener('click',function(e){
-        if(!audio.duration)return;
-        var r=panelProgressWrap.getBoundingClientRect();
-        audio.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audio.duration;
-      });
+      audio.addEventListener('error',function(){panelTrack.textContent='File not found';panelArtist.textContent='Put soundtrack.mp3 in /public';isPlaying=false;updatePlayIcon();});
+      panelProgressWrap.addEventListener('click',function(e){if(!audio.duration)return;var r=panelProgressWrap.getBoundingClientRect();audio.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audio.duration;});
     })();
 
-    /* ===== PARALLAX ORBS ===== */
     (function(){
       var orbs=document.querySelectorAll('.orb');var t=false;
       window.addEventListener('scroll',function(){
         if(!t){requestAnimationFrame(function(){
-          var y=window.scrollY;
-          orbs.forEach(function(o,i){
-            var s=i===0?0.15:0.25;
-            o.style.transform='translateX(-50%) translateY('+(y*s)+'px)';
-          });t=false;
+          var y=window.scrollY;orbs.forEach(function(o,i){var s=i===0?0.15:0.25;o.style.transform='translateX(-50%) translateY('+(y*s)+'px)';});t=false;
         });t=true;}
       },{passive:true});
     })();
