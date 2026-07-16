@@ -1,0 +1,132 @@
+.locmap-root {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.locmap-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.locmap-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--muted) 20%, transparent), transparent, color-mix(in srgb, var(--muted) 40%, transparent));
+  pointer-events: none;
+}
+
+.locmap-expanded {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.locmap-expanded-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-2);
+}
+
+.locmap-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.locmap-road {
+  fill: none;
+}
+
+.locmap-road-main {
+  stroke: color-mix(in srgb, var(--text) 25%, transparent);
+}
+
+.locmap-road-v {
+  stroke: color-mix(in srgb, var(--text) 20%, transparent);
+}
+
+.locmap-road-sec {
+  stroke: color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.locmap-building {
+  position: absolute;
+  border-radius: 2px;
+  border: 1px solid color-mix(in srgb, var(--muted) 20%, transparent);
+}
+
+.locmap-building-1 {
+  top: 40%; left: 10%; width: 15%; height: 20%;
+  background: color-mix(in srgb, var(--muted) 30%, transparent);
+}
+
+.locmap-building-2 {
+  top: 15%; left: 35%; width: 12%; height: 15%;
+  background: color-mix(in srgb, var(--muted) 25%, transparent);
+}
+
+.locmap-building-3 {
+  top: 70%; left: 75%; width: 18%; height: 18%;
+  background: color-mix(in srgb, var(--muted) 28%, transparent);
+}
+
+.locmap-building-4 {
+  top: 20%; right: 10%; width: 10%; height: 25%;
+  background: color-mix(in srgb, var(--muted) 22%, transparent);
+}
+
+.locmap-building-5 {
+  top: 55%; left: 5%; width: 8%; height: 12%;
+  background: color-mix(in srgb, var(--muted) 20%, transparent);
+}
+
+.locmap-building-6 {
+  top: 8%; left: 75%; width: 14%; height: 10%;
+  background: color-mix(in srgb, var(--muted) 22%, transparent);
+}
+
+.locmap-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.locmap-pin-svg {
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--blue) 50%, transparent));
+}
+
+.locmap-pin-fill {
+  fill: var(--blue);
+}
+
+.locmap-pin-dot {
+  fill: var(--base);
+}
+
+.locmap-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--surface), transparent, transparent);
+  opacity: 0.6;
+}
+
+.locmap-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+}
+
+.locmap-grid-svg {
+  position: absolute;
+  inset: 0;
+}
+
+.locmap-grid-path {
+  stroke: var(--text);
+}
