@@ -102,8 +102,9 @@ const LightRays = ({
 
       if (!containerRef.current) return;
 
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 2),
+        dpr: Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2),
         alpha: true
       });
       rendererRef.current = renderer;

@@ -6,7 +6,8 @@ import TargetCursor from '../components/TargetCursor';
 import LocationMap from '../components/LocationMap';
 import TrueFocus from '../components/TrueFocus';
 import ProximityQuote from '../components/ProximityQuote';
-import Prism from '../components/Prism';
+import Balatro from '../components/Balatro';
+import SplashCursor from '../components/SplashCursor';
 ---
 
 <!DOCTYPE html>
@@ -298,6 +299,14 @@ import Prism from '../components/Prism';
 
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
 
+    @media(max-width:640px){
+      .orb{filter:blur(40px)}
+      .music-panel{backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%)}
+      .dock{backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%)}
+      .avatar-ring::before,.avatar-ring::after{animation-duration:12s}
+      body::before{opacity:0}
+    }
+
     .hero-lightrays {
       position: absolute;
       inset: 0;
@@ -322,8 +331,8 @@ import Prism from '../components/Prism';
 
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-  <GradualBlur
-    client:load
+    <GradualBlur
+    client:idle
     target="page"
     position="bottom"
     height="8rem"
@@ -389,7 +398,7 @@ import Prism from '../components/Prism';
       <div class="orb orb-blue" aria-hidden="true"></div>
       <div class="avatar-ring" aria-hidden="true">
         <div class="avatar-inner">
-          <img src="/profile.png" alt="Muhammad Fatih" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <img src="/profile.png" alt="Muhammad Fatih" width="110" height="110" loading="lazy" decoding="async" onerror="this.src='/profile.png';this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <span class="avatar-initials" style="display:none;">MF</span>
         </div>
       </div>
@@ -450,28 +459,28 @@ import Prism from '../components/Prism';
             <p>Bagi saya, teknologi bukan hanya tentang membangun sistem, tetapi juga tentang membangun <strong>dampak yang bermanfaat</strong> bagi banyak orang. Saya percaya pertumbuhan sejati terjadi ketika kita berani keluar dari zona nyaman.</p>
           </div>
           <div class="about-stats reveal" style="transition-delay:0.12s">
-            <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
+            <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
               <div style="padding: 1.1rem;">
                 <div class="stat-icon chrome"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
                 <div class="stat-label">Focus</div>
                 <div class="stat-value">Software Engineering & Education</div>
               </div>
             </BorderGlow>
-            <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
+            <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
               <div style="padding: 1.1rem;">
                 <div class="stat-icon white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg></div>
                 <div class="stat-label">Education</div>
                 <div class="stat-value">Fakultas Teknik, Universitas Negeri Surabaya</div>
               </div>
             </BorderGlow>
-            <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
+            <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
               <div style="padding: 1.1rem;">
                 <div class="stat-icon chrome"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
                 <div class="stat-label">Leadership</div>
-                <div class="stat-value">Kepala Divisi, Wakil Ketua Umum Paguyuban, Ketua OSIS</div>
+                <div class="stat-value">Kepala Divisi, Wakil Ketua Umum, Ketua Umum</div>
               </div>
             </BorderGlow>
-            <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
+            <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
               <div style="padding: 1.1rem;">
                 <div class="stat-icon blue"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></div>
                 <div class="stat-label">Communication</div>
@@ -514,8 +523,8 @@ import Prism from '../components/Prism';
           <p class="section-desc" style="margin-bottom:2rem">Setiap title yang saya sandang bukan sekadar penghargaan, melainkan tanggung jawab untuk terus berdampak.</p>
         </div>
         <div class="titles-scroll reveal" style="transition-delay:0.1s">
-          <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Kepala Divisi Paguyuban</div><div class="title-org">Putera Puteri Batik Surabaya</div><span class="title-badge">Pageant</span></div>
-          <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Putera Batik Surabaya</div><div class="title-org">Perwakilan budaya batik kota Surabaya</div><span class="title-badge">Pageant</span></div>
+          <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Kepala Divisi Paguyuban</div><div class="title-org">Putera Puteri Batik Kota Surabaya</div><span class="title-badge">Pageant</span></div>
+          <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Putera Batik Surabaya</div><div class="title-org">Perwakilan budaya batik Kota Surabaya melalui Paguyuban Putera Puteri Batik Kota Surabaya</div><span class="title-badge">Pageant</span></div>
           <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Wakil Ketua Umum Paguyuban</div><div class="title-org">Mbak Mas Fakultas Teknik, Universitas Negeri Surabaya</div><span class="title-badge">Organisasi</span></div>
           <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Mas Fakultas Teknik UNESA</div><div class="title-org">Representasi mahasiswa dan Fakultas Teknik, Universitas Negeri Surabaya</div><span class="title-badge">Pageant</span></div>
           <div class="title-card cursor-target"><div class="title-year">2025</div><div class="title-name">Duta Inspiratif Indonesia 3</div><div class="title-org">Program pengembangan pemuda inspiratif nasional</div><span class="title-badge">Duta</span></div>
@@ -534,19 +543,19 @@ import Prism from '../components/Prism';
           <h2 class="section-heading" style="text-align:center">Four Pillars<br/><em style="font-style:italic;color:var(--chrome);font-weight:500">of Growth.</em></h2>
         </div>
         <div class="bento">
-          <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="bento-wide reveal">
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="bento-wide reveal">
             <svg class="bento-bg-icon" style="position:absolute;top:1rem;right:1rem;width:70px;height:70px;pointer-events:none;z-index:0;color:rgba(128,128,160,0.04)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
             <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag blue">Software · AI · Cyber</span><div class="bento-title">Technology &<br/>Engineering</div><p class="bento-body">Fokus pada Software Development, Cyber Security, dan Artificial Intelligence. Mengubah ide kompleks menjadi solusi digital inovatif yang siap bersaing di era modern.</p></div>
           </BorderGlow>
-          <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
             <svg class="bento-bg-icon" style="position:absolute;top:1rem;right:1rem;width:70px;height:70px;pointer-events:none;z-index:0;color:rgba(128,128,160,0.04)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M2 4h20"/><path d="m2 4 4.5 16h11L22 4"/></svg>
             <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag chrome">Culture · Advocacy</span><div class="bento-title">Pageant &<br/>Culture</div><p class="bento-body">Platform untuk membangun advokasi sosial, melestarikan budaya Indonesia, dan memberikan dampak nyata bagi masyarakat.</p></div>
           </BorderGlow>
-          <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
             <svg class="bento-bg-icon" style="position:absolute;top:1rem;right:1rem;width:70px;height:70px;pointer-events:none;z-index:0;color:rgba(128,128,160,0.04)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag white">Org · Decision</span><div class="bento-title">Leadership</div><p class="bento-body">Memimpin organisasi mengajarkan bahwa leadership bukan soal posisi, melainkan keberanian mengambil keputusan dan menginspirasi.</p></div>
           </BorderGlow>
-          <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="bento-wide reveal">
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="bento-wide reveal">
             <svg class="bento-bg-icon" style="position:absolute;top:1rem;right:1rem;width:70px;height:70px;pointer-events:none;z-index:0;color:rgba(128,128,160,0.04)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
             <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag chrome">MC · Moderator · Presenter</span><div class="bento-title">Public Speaking</div><p class="bento-body">Ide dan visi yang hebat memiliki dampak jauh lebih besar ketika disampaikan dengan energi, kejelasan, dan inspirasi. Saya merawat keyakinan itu di setiap panggung.</p></div>
           </BorderGlow>
@@ -562,7 +571,7 @@ import Prism from '../components/Prism';
           <h2 class="section-heading" style="text-align:center">What I<br/><em style="font-style:italic;color:var(--chrome);font-weight:500">Bring to the Table.</em></h2>
         </div>
         <div class="skills-grid">
-          <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
             <div style="padding: 1.4rem;">
               <div class="skill-group-title"><span class="sg-dot c"></span>Technical</div>
               <div class="skill-tags">
@@ -575,7 +584,7 @@ import Prism from '../components/Prism';
               </div>
             </div>
           </BorderGlow>
-          <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
             <div style="padding: 1.4rem;">
               <div class="skill-group-title"><span class="sg-dot b"></span>Communication</div>
               <div class="skill-tags">
@@ -588,7 +597,7 @@ import Prism from '../components/Prism';
               </div>
             </div>
           </BorderGlow>
-          <BorderGlow client:load backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
             <div style="padding: 1.4rem;">
               <div class="skill-group-title"><span class="sg-dot w"></span>Leadership & Soft Skills</div>
               <div class="skill-tags">
@@ -611,7 +620,7 @@ import Prism from '../components/Prism';
         <p class="section-eyebrow" style="justify-content:center">Current Location</p>
         <h2 class="section-heading" style="text-align:center">Based in<br/><em style="font-style:italic;color:var(--chrome);font-weight:500">Surabaya, Indonesia.</em></h2>
         <div style="margin-top:1.5rem;display:flex;justify-content:center">
-          <LocationMap client:load location="Surabaya, Indonesia" coordinates="7.2504° S, 112.7688° E" />
+          <LocationMap client:visible location="Surabaya, Indonesia" coordinates="7.2504° S, 112.7688° E" />
         </div>
       </div>
     </section>
@@ -622,7 +631,7 @@ import Prism from '../components/Prism';
     <div class="values-wrap">
       <div class="values-inner reveal">
         <span class="quote-mark" aria-hidden="true">"</span>
-        <blockquote class="quote-text"><ProximityQuote client:load /></blockquote>
+        <blockquote class="quote-text"><ProximityQuote client:visible /></blockquote>
         <div class="values-chips" role="list" aria-label="Core values">
           <span class="values-chip" role="listitem">Growth Mindset</span>
           <span class="values-chip" role="listitem">Discipline</span>
@@ -635,7 +644,7 @@ import Prism from '../components/Prism';
 
     <!-- ====== FOOTER ====== -->
     <footer id="connect" class="footer">
-      <Prism client:load animationType="hover" height={3} baseWidth={5} scale={3} glow={0.8} noise={0.3} colorFrequency={1.2} bloom={0.8} timeScale={0.5} suspendWhenOffscreen={true} transparent={true} />
+      <Balatro client:visible color1="#000000" color2="#004a9d" color3="#080f10" pixelFilter={700} mouseInteraction={true} isRotate={false} />
       <div class="footer-glow" aria-hidden="true"></div>
       <div class="footer-line" aria-hidden="true"></div>
       <div class="reveal">
@@ -657,7 +666,8 @@ import Prism from '../components/Prism';
       </div>
     </footer>
 
-    <TargetCursor client:load targetSelector=".cursor-target" cursorColor="#ffffff" cursorColorOnTarget="var(--blue)" hideDefaultCursor={true} sectionSelector="#titles" />
+    <TargetCursor client:idle targetSelector=".cursor-target" cursorColor="#ffffff" cursorColorOnTarget="var(--blue)" hideDefaultCursor={true} sectionSelector="#titles" />
+    <SplashCursor client:visible COLOR="#4d8aff" RAINBOW_MODE={false} sectionSelector="#about, #journey, #skills, #location" DYE_RESOLUTION={256} SIM_RESOLUTION={64} PRESSURE_ITERATIONS={8} CURL={1} />
   </main>
 
   <script>
@@ -779,9 +789,10 @@ import Prism from '../components/Prism';
       var iconPlay=document.getElementById('iconPlay');
       var iconPause=document.getElementById('iconPause');
       var visBars=document.querySelectorAll('.vis-mini-bar');
-      var audio=new Audio();
+      var audio=null;
       var isPlaying=false;
       var panelOpen=false;
+      var audioLoaded=false;
       function formatTime(s){
         if(isNaN(s))return'0:00';
         var m=Math.floor(s/60);
@@ -792,7 +803,25 @@ import Prism from '../components/Prism';
         iconPlay.style.display=isPlaying?'none':'block';
         iconPause.style.display=isPlaying?'block':'none';
       }
+      function initAudio(){
+        if(audioLoaded)return;
+        audioLoaded=true;
+        audio=new Audio();
+        audio.src='/soundtrack.mp3';
+        audio.preload='metadata';
+        audio.addEventListener('timeupdate',function(){
+          if(audio.duration){panelProgressBar.style.width=(audio.currentTime/audio.duration*100)+'%';panelTimeCurrent.textContent=formatTime(audio.currentTime);}
+        });
+        audio.addEventListener('loadedmetadata',function(){panelTimeDuration.textContent=formatTime(audio.duration);});
+        audio.addEventListener('ended',function(){audio.currentTime=0;pause();});
+        audio.addEventListener('error',function(){
+          panelTrack.textContent='File not found';
+          panelArtist.textContent='Put soundtrack.mp3 in /public';
+          isPlaying=false;updatePlayIcon();
+        });
+      }
       function play(){
+        if(!audio){initAudio();}
         audio.play().then(function(){
           isPlaying=true;visBars.forEach(function(b){b.classList.add('on');});updatePlayIcon();
         }).catch(function(){
@@ -800,33 +829,23 @@ import Prism from '../components/Prism';
         });
       }
       function pause(){
+        if(!audio)return;
         audio.pause();isPlaying=false;visBars.forEach(function(b){b.classList.remove('on');});updatePlayIcon();
       }
       panelTrack.textContent='Inspiring Technology';
       panelArtist.textContent='FRUITYAUDIO';
-      audio.src='/soundtrack.mp3';
-      audio.preload='metadata';
-      audio.load();
       dockMusic.addEventListener('click',function(e){
-        e.stopPropagation();panelOpen=!panelOpen;panel.classList.toggle('open',panelOpen);
+        e.stopPropagation();
+        if(!audioLoaded){initAudio();}
+        panelOpen=!panelOpen;panel.classList.toggle('open',panelOpen);
       });
       playBtn.addEventListener('click',function(){if(isPlaying){pause();}else{play();}});
       document.addEventListener('click',function(e){
         if(panelOpen&&!document.getElementById('dockWrap').contains(e.target)){panelOpen=false;panel.classList.remove('open');}
       });
       panel.addEventListener('click',function(e){e.stopPropagation();});
-      audio.addEventListener('timeupdate',function(){
-        if(audio.duration){panelProgressBar.style.width=(audio.currentTime/audio.duration*100)+'%';panelTimeCurrent.textContent=formatTime(audio.currentTime);}
-      });
-      audio.addEventListener('loadedmetadata',function(){panelTimeDuration.textContent=formatTime(audio.duration);});
-      audio.addEventListener('ended',function(){audio.currentTime=0;pause();});
-      audio.addEventListener('error',function(){
-        panelTrack.textContent='File not found';
-        panelArtist.textContent='Put soundtrack.mp3 in /public';
-        isPlaying=false;updatePlayIcon();
-      });
       panelProgressWrap.addEventListener('click',function(e){
-        if(!audio.duration)return;
+        if(!audio||!audio.duration)return;
         var r=panelProgressWrap.getBoundingClientRect();
         audio.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audio.duration;
       });

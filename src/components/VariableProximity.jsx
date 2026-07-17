@@ -2,8 +2,9 @@ import { forwardRef, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import './VariableProximity.css';
 
-function useAnimationFrame(callback) {
+function useAnimationFrame(callback, active) {
   useEffect(() => {
+    if (!active) return;
     let frameId;
     const loop = () => {
       callback();
@@ -11,7 +12,7 @@ function useAnimationFrame(callback) {
     };
     frameId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameId);
-  }, [callback]);
+  }, [callback, active]);
 }
 
 function useMousePositionRef(containerRef) {
@@ -69,6 +70,26 @@ const VariableProximity = forwardRef((props, ref) => {
   const interpolatedSettingsRef = useRef([]);
   const mousePositionRef = useMousePositionRef(containerRef);
   const lastPositionRef = useRef({ x: null, y: null });
+  const containerElRef = useRef(null);
+  const letterRectsRef = useRef([]);
+  const isVisible = useRef(true);
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => { mountedRef.current = false; };
+  }, []);
+
+  useEffect(() => {
+    const el = getContainer(containerRef, containerSelector);
+    containerElRef.current = el;
+    const io = new IntersectionObserver(
+      ([entry]) => { isVisible.current = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    if (el) io.observe(el);
+    return () => { io.disconnect(); };
+  }, [containerRef, containerSelector]);
 
   const parsedSettings = useMemo(() => {
     const parseSettings = settingsStr =>
@@ -108,7 +129,9 @@ const VariableProximity = forwardRef((props, ref) => {
   };
 
   useAnimationFrame(() => {
-    const containerEl = getContainer(containerRef, containerSelector);
+    if (!isVisible.current) return;
+    const containerEl = containerElRef.current;
+    if (!containerEl) return;
     const containerRect = containerEl.getBoundingClientRect();
     const { x, y } = mousePositionRef.current;
     if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
@@ -119,16 +142,15 @@ const VariableProximity = forwardRef((props, ref) => {
     letterRefs.current.forEach((letterRef, index) => {
       if (!letterRef) return;
 
-      const rect = letterRef.getBoundingClientRect();
+      let rect = letterRectsRef.current[index];
+      if (!rect) {
+        rect = letterRef.getBoundingClientRect();
+        letterRectsRef.current[index] = rect;
+      }
       const letterCenterX = rect.left + rect.width / 2 - containerRect.left;
       const letterCenterY = rect.top + rect.height / 2 - containerRect.top;
 
-      const distance = calculateDistance(
-        mousePositionRef.current.x,
-        mousePositionRef.current.y,
-        letterCenterX,
-        letterCenterY
-      );
+      const distance = calculateDistance(x, y, letterCenterX, letterCenterY);
 
       if (distance >= radius) {
         letterRef.style.fontVariationSettings = fromFontVariationSettings;
@@ -146,7 +168,7 @@ const VariableProximity = forwardRef((props, ref) => {
       interpolatedSettingsRef.current[index] = newSettings;
       letterRef.style.fontVariationSettings = newSettings;
     });
-  });
+  }, isVisible);
 
   const words = label.split(' ');
   let letterIndex = 0;
@@ -168,6 +190,9 @@ const VariableProximity = forwardRef((props, ref) => {
                 key={currentLetterIndex}
                 ref={el => {
                   letterRefs.current[currentLetterIndex] = el;
+                  if (el) {
+                    letterRectsRef.current[currentLetterIndex] = el.getBoundingClientRect();
+                  }
                 }}
                 style={{
                   display: 'inline-block',
