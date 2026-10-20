@@ -73,6 +73,17 @@ import SplashCursor from '../components/SplashCursor';
 
     .scroll-progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--chrome-lo),var(--chrome),var(--blue));z-index:10001;will-change:width;transition:width 80ms linear}
 
+    /* ===== PRELOADER ===== */
+    #preloader{position:fixed;inset:0;z-index:11000;background:var(--base);display:flex;align-items:center;justify-content:center;transition:opacity 0.6s ease,visibility 0.6s ease}
+    #preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+    .pre-inner{text-align:center}
+    .pre-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.1rem,4vw,1.6rem);letter-spacing:-0.02em;color:var(--text);margin-bottom:0.4rem}
+    .pre-name em{font-style:italic;font-weight:500;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .pre-role{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted-2);margin-bottom:2rem}
+    .pre-bar{width:min(240px,60vw);height:1px;background:var(--border);margin:0 auto 0.9rem;overflow:hidden}
+    .pre-bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--chrome-lo),var(--chrome),var(--blue));transition:width 0.15s linear}
+    .pre-count{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--chrome)}
+
     /* ===== DOCK ===== */
     .dock-wrap{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);bottom:calc(1rem + env(safe-area-inset-bottom));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;pointer-events:none}
     .music-panel{pointer-events:auto;background:var(--panel-bg);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid var(--border);border-radius:14px;padding:0.75rem 0.9rem;width:230px;opacity:0;transform:translateY(8px) scale(0.95);transition:all 0.3s cubic-bezier(0.25,1,0.5,1);pointer-events:none;box-shadow:0 12px 40px var(--dock-glow)}
@@ -94,6 +105,8 @@ import SplashCursor from '../components/SplashCursor';
     [data-theme="light"] .dock{box-shadow:0 16px 40px var(--dock-glow),inset 0 1px 0 rgba(255,255,255,0.5)}
     .dock-sep{width:1px;height:20px;background:var(--border);margin:0 0.1rem;border-radius:1px;flex-shrink:0}
     .dock-link{position:relative;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;color:var(--muted);transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none;flex-shrink:0;background:none;border:none;cursor:pointer;font-family:inherit}
+    #dockLang{font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:0.05em}
+    #dockLang.lang-active{color:var(--blue)}
     .dock-link.active{color:var(--text);background:rgba(128,128,160,0.1)}
     .dock-link:hover{transform:scale(1.12) translateY(-3px);color:var(--text);background:rgba(128,128,160,0.1)}
     .dock-link:active{transform:scale(0.92)}
@@ -130,7 +143,7 @@ import SplashCursor from '../components/SplashCursor';
     @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
     .hero-badge,.hero-name,.hero-sub,.hero-pills,.hero-cta{transform:translateY(12px)}
     .hero-name{opacity:0;animation:fadeUp 0.8s ease 1s forwards;margin-bottom:0.75rem}
-    .hero-sub{font-size:0.95rem;color:var(--muted);max-width:420px;line-height:1.8;margin:0 auto 1.5rem;font-weight:300;opacity:0;animation:fadeUp 0.8s ease 1.25s forwards}
+    .hero-sub{font-size:1.05rem;color:var(--text-2);max-width:440px;line-height:1.8;margin:0 auto 1.5rem;font-weight:300;opacity:0;animation:fadeUp 0.8s ease 1.25s forwards}
     .hero-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:0.4rem;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 1.45s forwards}
     .hero-pill{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.04em;color:var(--muted);border:1px solid var(--border);padding:0.3rem 0.7rem;border-radius:9999px;background:rgba(128,128,160,0.04);transition:all 0.2s ease;cursor:default}
     .hero-pill:hover{border-color:rgba(128,128,160,0.25);color:var(--chrome);background:var(--chrome-dim)}
@@ -162,12 +175,12 @@ import SplashCursor from '../components/SplashCursor';
     .section-wrap{max-width:1100px;margin:0 auto;padding:4rem 1rem}
     .section-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--chrome);margin-bottom:1rem;display:flex;align-items:center;gap:0.6rem}
     .section-eyebrow::after{content:'';display:block;width:32px;height:1px;background:var(--chrome);opacity:0.4}
-    .section-heading{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(1.8rem,5vw,3.4rem);line-height:1.1;letter-spacing:-0.03em;color:var(--text);margin-bottom:1rem}
-    .section-desc{color:var(--muted);font-size:0.92rem;line-height:1.8;font-weight:300;max-width:560px}
+    .section-heading{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.2rem,6vw,4.25rem);line-height:1.02;letter-spacing:-0.035em;color:var(--text);margin-bottom:1.1rem}
+    .section-desc{color:var(--text-2);font-size:1rem;line-height:1.8;font-weight:300;max-width:560px}
 
     /* ===== ABOUT ===== */
     .about-grid{display:grid;grid-template-columns:1fr;gap:2.5rem}
-    .about-text p{color:var(--muted);line-height:1.85;font-size:0.95rem;font-weight:300;margin-bottom:1rem}
+    .about-text p{color:var(--text-2);line-height:1.85;font-size:1rem;font-weight:300;margin-bottom:1rem}
     .about-text strong{color:var(--text);font-weight:500}
     .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
     .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.1rem;position:relative;overflow:hidden;transition:all 0.3s ease;cursor:default}
@@ -180,13 +193,13 @@ import SplashCursor from '../components/SplashCursor';
     .stat-icon.blue{background:var(--blue-dim);color:var(--blue)}
     .stat-icon.white{background:rgba(128,128,160,0.06);color:var(--text)}
     .stat-label{font-size:0.62rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;color:var(--muted-2);text-transform:uppercase;margin-bottom:0.2rem}
-    .stat-value{font-size:0.82rem;font-weight:600;color:var(--text);line-height:1.4}
+    .stat-value{font-size:0.9rem;font-weight:600;color:var(--text);line-height:1.4}
 
     /* ===== HIGHLIGHT NUMBERS ===== */
     .numbers-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
     .numbers-grid{max-width:900px;margin:0 auto;padding:3.5rem 1rem;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
     .number-item{text-align:center}
-    .number-val{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,6vw,3.2rem);font-weight:700;color:var(--text);line-height:1;margin-bottom:0.35rem}
+    .number-val{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,8vw,5.75rem);font-weight:700;color:var(--text);line-height:0.95;margin-bottom:0.5rem;letter-spacing:-0.03em}
     .number-val .num-chrome{background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .number-label{font-size:0.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted-2)}
 
@@ -198,8 +211,8 @@ import SplashCursor from '../components/SplashCursor';
     .title-card:hover{border-color:var(--border-h)}
     .title-card:active{transform:scale(0.97)}
     .title-year{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;color:var(--blue);text-transform:uppercase;margin-bottom:0.6rem;display:inline-block}
-    .title-name{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:0.4rem}
-    .title-org{font-size:0.75rem;color:var(--muted);line-height:1.5}
+    .title-name{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:0.45rem;letter-spacing:-0.01em}
+    .title-org{font-size:0.78rem;color:var(--text-2);line-height:1.55}
     .title-badge{display:inline-block;margin-top:0.75rem;font-size:0.55rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:9999px;border:1px solid var(--border);color:var(--chrome);background:var(--chrome-dim)}
 
     /* ===== JOURNEY BENTO ===== */
@@ -214,27 +227,49 @@ import SplashCursor from '../components/SplashCursor';
     .bento-tag.chrome{color:var(--chrome);border-color:rgba(128,128,160,0.3);background:var(--chrome-dim)}
     .bento-tag.blue{color:var(--blue);border-color:rgba(77,138,255,0.3);background:var(--blue-dim)}
     .bento-tag.white{color:var(--muted);border-color:var(--border);background:rgba(128,128,160,0.03)}
-    .bento-title{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:0.5rem;line-height:1.2}
-    .bento-body{font-size:0.82rem;color:var(--muted);line-height:1.7;font-weight:300}
+    .bento-title{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;color:var(--text);margin-bottom:0.55rem;line-height:1.15;letter-spacing:-0.02em}
+    .bento-body{font-size:0.9rem;color:var(--text-2);line-height:1.7;font-weight:300}
 
     /* ===== SKILLS ===== */
     .skills-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
     .skill-group{background:var(--surface);border:1px solid var(--border);border-radius:1.25rem;padding:1.4rem;position:relative;overflow:hidden}
     .skill-group::before{content:'';position:absolute;inset:0;background:var(--card-over);pointer-events:none}
-    .skill-group-title{font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+    .skill-group-title{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
     .skill-group-title .sg-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
     .skill-group-title .sg-dot.c{background:var(--chrome)}
     .skill-group-title .sg-dot.b{background:var(--blue)}
     .skill-group-title .sg-dot.w{background:var(--muted)}
     .skill-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
-    .skill-tag{font-size:0.7rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.02em;color:var(--muted);border:1px solid var(--border);padding:0.3rem 0.65rem;border-radius:8px;background:rgba(128,128,160,0.03);transition:all 0.2s ease;cursor:default}
+    .skill-tag{font-size:0.75rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.02em;color:var(--text-2);border:1px solid var(--border);padding:0.35rem 0.75rem;border-radius:8px;background:rgba(128,128,160,0.03);transition:all 0.2s ease;cursor:default}
     .skill-tag:hover{border-color:rgba(128,128,160,0.25);color:var(--chrome);background:var(--chrome-dim)}
+
+    /* ===== WORKS ===== */
+    .works-grid{display:grid;grid-template-columns:1fr;gap:0.75rem}
+    .works-grid :global(.work-item){display:flex}
+    .works-grid :global(.work-item .border-glow-inner){display:flex;width:100%}
+    .works-grid :global(.work-item .work-card){flex:1;display:flex;flex-direction:column;padding:1.5rem;text-decoration:none;position:relative}
+    .work-card::before{content:'';position:absolute;inset:0;background:var(--card-over);pointer-events:none}
+    .work-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+    .work-num{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--blue)}
+    .work-tag{font-family:'JetBrains Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.55rem;border-radius:9999px;border:1px solid var(--border);color:var(--muted);background:var(--base);transition:all 0.3s ease}
+    .works-grid :global(.border-glow-card:hover) .work-tag{color:var(--blue);border-color:rgba(77,138,255,0.3);background:var(--blue-dim)}
+    .work-name{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:0.5rem;letter-spacing:-0.015em;transition:color 0.3s ease}
+    .work-desc{font-size:0.82rem;color:var(--muted);line-height:1.6;font-weight:300;margin-bottom:1.25rem}
+    .work-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:0.75rem}
+    .work-domain{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.02em;color:var(--muted-2);transition:color 0.3s ease;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .work-arrow{width:16px;height:16px;min-width:16px;color:var(--muted-2);transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1)}
+    .works-grid :global(.border-glow-card:hover) .work-arrow{color:var(--blue);transform:translate(3px,-3px)}
+    .works-grid :global(.border-glow-card:hover) .work-domain{color:var(--blue)}
+    .works-grid :global(.work-wide){grid-column:span 2}
+    .work-shot{border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:1.1rem;aspect-ratio:16/10;background:var(--surface-2)}
+    .work-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.5s cubic-bezier(0.25,1,0.5,1)}
+    .works-grid :global(.border-glow-card:hover) .work-shot img{transform:scale(1.04)}
 
     /* ===== PHILOSOPHY ===== */
     .values-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:4rem 1rem}
     .values-inner{max-width:720px;margin:0 auto;text-align:center}
     .quote-mark{font-family:'Space Grotesk',sans-serif;font-size:5rem;line-height:0.5;color:var(--chrome);opacity:0.2;margin-bottom:1.25rem;display:block}
-    .quote-text{font-family:'Space Grotesk',sans-serif;font-weight:300;font-style:italic;font-size:clamp(1.2rem,3.5vw,2rem);color:var(--text);line-height:1.55;margin-bottom:2rem}
+    .quote-text{font-family:'Space Grotesk',sans-serif;font-weight:300;font-style:italic;font-size:clamp(1.4rem,4vw,2.5rem);color:var(--text);line-height:1.45;margin-bottom:2rem}
     .quote-text em{color:var(--chrome);font-style:normal;font-weight:500}
     .values-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem}
     .values-chip{font-size:0.72rem;font-weight:500;color:var(--muted);border:1px solid var(--border);padding:0.4rem 0.9rem;border-radius:9999px;background:var(--base);letter-spacing:0.02em;transition:all 0.2s ease;cursor:default}
@@ -243,12 +278,19 @@ import SplashCursor from '../components/SplashCursor';
     /* ===== FOOTER ===== */
     .footer{position:relative;padding:5rem 1rem 6rem;text-align:center;overflow:hidden}
     .footer .reveal{position:relative;z-index:2}
+    .contact-form{position:relative;z-index:2;max-width:440px;margin:0 auto 2rem;display:flex;flex-direction:column;gap:0.6rem;text-align:left}
+    .contact-row{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+    .contact-form input,.contact-form textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1rem;font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--text);outline:0;transition:border-color 0.2s ease}
+    .contact-form input:focus,.contact-form textarea:focus{border-color:rgba(77,138,255,0.45)}
+    .contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--muted)}
+    .contact-form textarea{resize:vertical;min-height:110px}
+    .contact-form button{justify-content:center;width:fit-content;margin:0 auto}
     .footer-glow{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,var(--footer-glow) 40%,transparent 70%);pointer-events:none;filter:blur(50px)}
     .footer-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--border),transparent);margin:0 auto 3rem}
     .footer-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted-2);margin-bottom:1.25rem}
-    .footer-heading{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.4rem,8vw,5.5rem);line-height:1.05;letter-spacing:-0.03em;color:var(--text);margin-bottom:1rem}
+    .footer-heading{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.8rem,10vw,6.75rem);line-height:1.02;letter-spacing:-0.035em;color:var(--text);margin-bottom:1rem}
     .footer-heading span{display:block;background:var(--grad-foot);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:italic}
-    .footer-sub{color:var(--muted);font-size:0.9rem;line-height:1.8;max-width:420px;margin:0 auto 2.5rem;font-weight:300}
+    .footer-sub{color:var(--text-2);font-size:1rem;line-height:1.8;max-width:440px;margin:0 auto 2.5rem;font-weight:300}
     .footer-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;margin-bottom:3.5rem}
     .btn-chrome{display:inline-flex;align-items:center;gap:0.45rem;background:var(--grad-btn);color:var(--btn-chrome-text);font-family:'Inter',sans-serif;font-weight:700;font-size:0.8rem;padding:0.85rem 1.6rem;border-radius:9999px;text-decoration:none;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
     .btn-chrome:hover{transform:scale(1.04) translateY(-2px);box-shadow:0 10px 30px rgba(128,128,160,0.2)}
@@ -274,8 +316,9 @@ import SplashCursor from '../components/SplashCursor';
       .title-card{flex:0 0 300px}
       .bento{grid-template-columns:1fr 1fr}.bento-wide{grid-column:span 2}
       .bento-card{padding:1.75rem}.bento-bg-icon{width:90px;height:90px}
-      .bento-title{font-size:1.4rem}.bento-wide .bento-title{font-size:1.7rem}
+      .bento-title{font-size:1.6rem}.bento-wide .bento-title{font-size:2rem}
       .skills-grid{grid-template-columns:1fr 1fr}
+      .works-grid{grid-template-columns:1fr 1fr}
       .music-panel{width:260px}
     }
 
@@ -329,6 +372,15 @@ import SplashCursor from '../components/SplashCursor';
 </head>
 <body>
 
+  <div id="preloader" aria-hidden="true">
+    <div class="pre-inner">
+      <div class="pre-name">Muhammad <em>Fatih</em></div>
+      <div class="pre-role">Software &middot; Speaking &middot; Leadership</div>
+      <div class="pre-bar"><i id="preBar"></i></div>
+      <div class="pre-count" id="preCount">0%</div>
+    </div>
+  </div>
+
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
     <GradualBlur
@@ -374,6 +426,8 @@ import SplashCursor from '../components/SplashCursor';
       <div class="dock-sep" aria-hidden="true"></div>
       <a href="#journey" class="dock-link" data-label="Journey" aria-label="Journey"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></a>
       <div class="dock-sep" aria-hidden="true"></div>
+      <a href="#works" class="dock-link" data-label="Works" aria-label="Works"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></a>
+      <div class="dock-sep" aria-hidden="true"></div>
       <a href="#connect" class="dock-link" data-label="Connect" aria-label="Connect"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
       <div class="dock-sep" aria-hidden="true"></div>
       <button class="dock-link" id="dockMusic" data-label="Music" aria-label="Toggle music panel"><div class="vis-mini" id="visMini"><div class="vis-mini-bar"></div><div class="vis-mini-bar"></div><div class="vis-mini-bar"></div></div></button>
@@ -381,6 +435,7 @@ import SplashCursor from '../components/SplashCursor';
         <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
+      <button class="dock-link" id="dockLang" data-label="ID / EN" aria-label="Ganti bahasa">EN</button>
       <div class="dock-btt-group" id="dockBttGroup">
         <div class="dock-sep" aria-hidden="true"></div>
         <button class="dock-link" id="dockBtt" data-label="Top" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></button>
@@ -406,7 +461,7 @@ import SplashCursor from '../components/SplashCursor';
       <h1 class="hero-name" aria-label="Muhammad Fatih">
         <TrueFocus client:load sentence="Muhammad Fatih" borderColor="var(--blue)" glowColor="color-mix(in srgb, var(--blue) 60%, transparent)" blurAmount={3} animationDuration={1} pauseBetweenAnimations={1.5} />
       </h1>
-      <p class="hero-sub">Membangun sistem melalui teknologi, berdampak melalui komunikasi dan kepemimpinan.</p>
+      <p class="hero-sub" data-id="Membangun sistem melalui teknologi, berdampak melalui komunikasi dan kepemimpinan." data-en="Building systems through technology, creating impact through communication and leadership.">Membangun sistem melalui teknologi, berdampak melalui komunikasi dan kepemimpinan.</p>
       <div class="hero-pills" aria-label="Roles">
         <span class="hero-pill">Software Engineer</span>
         <span class="hero-pill">Graphic Designer</span>
@@ -415,8 +470,8 @@ import SplashCursor from '../components/SplashCursor';
         <span class="hero-pill">Pageant & Cultural Person</span>
       </div>
       <div class="hero-cta">
-        <a href="https://portfolio-fatih-fawn.vercel.app" target="_blank" rel="noopener" class="btn-primary">Lihat Portfolio <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
-        <a href="#about" class="btn-secondary">Kenali Lebih Jauh</a>
+        <a href="https://portfolio-fatih-fawn.vercel.app" target="_blank" rel="noopener" class="btn-primary"><span data-id="Lihat Portfolio" data-en="View Portfolio">Lihat Portfolio</span> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+        <a href="#about" class="btn-secondary" data-id="Kenali Lebih Jauh" data-en="Get to Know Me">Kenali Lebih Jauh</a>
         <a href="/cv-muhammad-fatih.pdf" download class="btn-secondary">Download CV <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></a>
       </div>
     </section>
@@ -455,8 +510,8 @@ import SplashCursor from '../components/SplashCursor';
           <div class="about-text reveal">
             <p class="section-eyebrow">About Me</p>
             <h2 class="section-heading">Who I Am.</h2>
-            <p>Halo, saya Muhammad Fatih. Perjalanan saya mempertemukan dua dunia yang berbeda namun saling melengkapi: <strong>logical thinking</strong> dari dunia teknologi dan <strong>communication skills</strong> dari dunia organisasi, pageant, serta public speaking.</p>
-            <p>Bagi saya, teknologi bukan hanya tentang membangun sistem, tetapi juga tentang membangun <strong>dampak yang bermanfaat</strong> bagi banyak orang. Saya percaya pertumbuhan sejati terjadi ketika kita berani keluar dari zona nyaman.</p>
+            <p data-id="Halo, saya Muhammad Abdee Nur Fatih. Perjalanan saya mempertemukan dua dunia yang berbeda namun saling melengkapi: &lt;strong&gt;logical thinking&lt;/strong&gt; dari dunia teknologi dan &lt;strong&gt;communication skills&lt;/strong&gt; dari dunia organisasi, pageant, serta public speaking." data-en="Hi, I'm Muhammad Abdee Nur Fatih. My journey brings together two different yet complementary worlds: &lt;strong&gt;logical thinking&lt;/strong&gt; from technology and &lt;strong&gt;communication skills&lt;/strong&gt; from organizations, pageants, and public speaking.">Halo, saya Muhammad Abdee Nur Fatih. Perjalanan saya mempertemukan dua dunia yang berbeda namun saling melengkapi: <strong>logical thinking</strong> dari dunia teknologi dan <strong>communication skills</strong> dari dunia organisasi, pageant, serta public speaking.</p>
+            <p data-id="Bagi saya, teknologi bukan hanya tentang membangun sistem, tetapi juga tentang membangun &lt;strong&gt;dampak yang bermanfaat&lt;/strong&gt; bagi banyak orang. Saya percaya pertumbuhan sejati terjadi ketika kita berani keluar dari zona nyaman." data-en="To me, technology isn't just about building systems — it's about building &lt;strong&gt;meaningful impact&lt;/strong&gt; for many people. I believe real growth happens when we dare to step out of our comfort zone.">Bagi saya, teknologi bukan hanya tentang membangun sistem, tetapi juga tentang membangun <strong>dampak yang bermanfaat</strong> bagi banyak orang. Saya percaya pertumbuhan sejati terjadi ketika kita berani keluar dari zona nyaman.</p>
           </div>
           <div class="about-stats reveal" style="transition-delay:0.12s">
             <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
@@ -470,14 +525,14 @@ import SplashCursor from '../components/SplashCursor';
               <div style="padding: 1.1rem;">
                 <div class="stat-icon white"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5"/></svg></div>
                 <div class="stat-label">Education</div>
-                <div class="stat-value">Fakultas Teknik, Universitas Negeri Surabaya</div>
+                <div class="stat-value" data-id="Fakultas Teknik, Universitas Negeri Surabaya" data-en="Faculty of Engineering, Universitas Negeri Surabaya">Fakultas Teknik, Universitas Negeri Surabaya</div>
               </div>
             </BorderGlow>
             <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
               <div style="padding: 1.1rem;">
                 <div class="stat-icon chrome"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
                 <div class="stat-label">Leadership</div>
-                <div class="stat-value">Kepala Divisi, Wakil Ketua Umum, Ketua Umum</div>
+                <div class="stat-value" data-id="Kepala Divisi, Wakil Ketua Umum, Ketua Umum" data-en="Division Head, Vice President, President">Kepala Divisi, Wakil Ketua Umum, Ketua Umum</div>
               </div>
             </BorderGlow>
             <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={16} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']}>
@@ -497,19 +552,19 @@ import SplashCursor from '../components/SplashCursor';
       <div class="numbers-grid">
         <div class="number-item">
           <div class="number-val"><span class="num-chrome">6+</span></div>
-          <div class="number-label">Title & Gelar</div>
+          <div class="number-label" data-id="Title &amp; Gelar" data-en="Titles &amp; Honors">Title & Gelar</div>
         </div>
         <div class="number-item">
           <div class="number-val"><span class="num-chrome">4</span></div>
-          <div class="number-label">Pilar Pertumbuhan</div>
+          <div class="number-label" data-id="Pilar Pertumbuhan" data-en="Growth Pillars">Pilar Pertumbuhan</div>
         </div>
         <div class="number-item">
           <div class="number-val"><span class="num-chrome">10+</span></div>
-          <div class="number-label">Pengalaman Organisasi</div>
+          <div class="number-label" data-id="Pengalaman Organisasi" data-en="Org Experience">Pengalaman Organisasi</div>
         </div>
         <div class="number-item">
           <div class="number-val"><span class="num-chrome">3+</span></div>
-          <div class="number-label">Bidang Keahlian</div>
+          <div class="number-label" data-id="Bidang Keahlian" data-en="Areas of Expertise">Bidang Keahlian</div>
         </div>
       </div>
     </div>
@@ -518,19 +573,20 @@ import SplashCursor from '../components/SplashCursor';
     <section id="titles">
       <div class="section-wrap">
         <div class="reveal">
-          <p class="section-eyebrow">Titles & Achievements</p>
-          <h2 class="section-heading">Gelar &<br/>Pencapaian.</h2>
-          <p class="section-desc" style="margin-bottom:2rem">Setiap title yang saya sandang bukan sekadar penghargaan, melainkan tanggung jawab untuk terus berdampak.</p>
+          <p class="section-eyebrow">Titles & Responsibility</p>
+          <h2 class="section-heading" data-id="Gelar &amp;&lt;br/&gt;Tanggung Jawab" data-en="Titles &amp;&lt;br/&gt;Responsibilities">Gelar &<br/>Tanggung Jawab</h2>
+          <p class="section-desc" style="margin-bottom:2rem" data-id="Setiap title yang saya sandang bukan sekadar penghargaan, melainkan tanggung jawab untuk terus berdampak." data-en="Every title I carry isn't just an award — it's a responsibility to keep making an impact.">Setiap title yang saya sandang bukan sekadar penghargaan, melainkan tanggung jawab untuk terus berdampak.</p>
         </div>
         <div class="titles-scroll reveal" style="transition-delay:0.1s">
-          <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Kepala Divisi Paguyuban</div><div class="title-org">Putera Puteri Batik Kota Surabaya</div><span class="title-badge">Pageant</span></div>
-          <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Putera Batik Surabaya</div><div class="title-org">Perwakilan budaya batik Kota Surabaya melalui Paguyuban Putera Puteri Batik Kota Surabaya</div><span class="title-badge">Pageant</span></div>
-          <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Wakil Ketua Umum Paguyuban</div><div class="title-org">Mbak Mas Fakultas Teknik, Universitas Negeri Surabaya</div><span class="title-badge">Organisasi</span></div>
-          <div class="title-card cursor-target"><div class="title-year">SEKARANG</div><div class="title-name">Mas Fakultas Teknik UNESA</div><div class="title-org">Representasi mahasiswa dan Fakultas Teknik, Universitas Negeri Surabaya</div><span class="title-badge">Pageant</span></div>
-          <div class="title-card cursor-target"><div class="title-year">2025</div><div class="title-name">Duta Inspiratif Indonesia 3</div><div class="title-org">Program pengembangan pemuda inspiratif nasional</div><span class="title-badge">Duta</span></div>
-          <div class="title-card cursor-target"><div class="title-year">2025</div><div class="title-name">Duta Pemimpin Berkarya Nusantara 3</div><div class="title-org">Platform kepemimpinan pemuda tingkat nasional</div><span class="title-badge">Duta</span></div>
+          <div class="title-card cursor-target"><div class="title-year" data-id="SEKARANG" data-en="NOW">SEKARANG</div><div class="title-name">Founder & Tutor</div><div class="title-org">RINTIS NALAR Learning Center</div><span class="title-badge">Lembaga</span></div>
+          <div class="title-card cursor-target"><div class="title-year" data-id="SEKARANG" data-en="NOW">SEKARANG</div><div class="title-name">Kepala Divisi Paguyuban</div><div class="title-org">Putera Puteri Batik Kota Surabaya</div><span class="title-badge" data-id="Organisasi" data-en="Organization">Organisasi</span></div>
+          <div class="title-card cursor-target"><div class="title-year" data-id="SEKARANG" data-en="NOW">SEKARANG</div><div class="title-name">Putera Batik Surabaya</div><div class="title-org" data-id="Perwakilan budaya batik Kota Surabaya melalui Paguyuban Putera Puteri Batik Kota Surabaya" data-en="Representing Surabaya batik culture through the Putera Puteri Batik Association">Perwakilan budaya batik Kota Surabaya melalui Paguyuban Putera Puteri Batik Kota Surabaya</div><span class="title-badge">Pageant</span></div>
+          <div class="title-card cursor-target"><div class="title-year" data-id="SEKARANG" data-en="NOW">SEKARANG</div><div class="title-name">Wakil Ketua Umum Paguyuban</div><div class="title-org">Mbak Mas Fakultas Teknik, Universitas Negeri Surabaya</div><span class="title-badge" data-id="Organisasi" data-en="Organization">Organisasi</span></div>
+          <div class="title-card cursor-target"><div class="title-year" data-id="SEKARANG" data-en="NOW">SEKARANG</div><div class="title-name">Mas Fakultas Teknik UNESA</div><div class="title-org" data-id="Representasi mahasiswa dan Fakultas Teknik, Universitas Negeri Surabaya" data-en="Representing students of the Faculty of Engineering, Universitas Negeri Surabaya">Representasi mahasiswa dan Fakultas Teknik, Universitas Negeri Surabaya</div><span class="title-badge">Pageant</span></div>
+          <div class="title-card cursor-target"><div class="title-year">2025</div><div class="title-name">Duta Inspiratif Indonesia 3</div><div class="title-org" data-id="Program pengembangan pemuda inspiratif nasional" data-en="A national inspiring-youth development program">Program pengembangan pemuda inspiratif nasional</div><span class="title-badge">Duta</span></div>
+          <div class="title-card cursor-target"><div class="title-year">2025</div><div class="title-name">Duta Pemimpin Berkarya Nusantara 3</div><div class="title-org" data-id="Platform kepemimpinan pemuda tingkat nasional" data-en="A national youth leadership platform">Platform kepemimpinan pemuda tingkat nasional</div><span class="title-badge">Duta</span></div>
           <div class="title-card cursor-target"><div class="title-year">2024</div><div class="title-name">Duta Koperasi Kabupaten Tuban</div><div class="title-org">Dinas Koperasi dan UMKM Kabupaten Tuban</div><span class="title-badge">Duta</span></div>
-          <div class="title-card cursor-target"><div class="title-year">2023</div><div class="title-name">Ketua OSIS</div><div class="title-org">SMKN Palang, Kabupaten Tuban</div><span class="title-badge">Organisasi</span></div>
+          <div class="title-card cursor-target"><div class="title-year">2023</div><div class="title-name" data-id="Ketua OSIS" data-en="OSIS President">Ketua OSIS</div><div class="title-org">SMKN Palang, Kabupaten Tuban</div><span class="title-badge" data-id="Organisasi" data-en="Organization">Organisasi</span></div>
         </div>
       </div>
     </section>
@@ -545,19 +601,19 @@ import SplashCursor from '../components/SplashCursor';
         <div class="bento">
           <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="bento-wide reveal">
             <svg class="bento-bg-icon" style="position:absolute;top:1rem;right:1rem;width:70px;height:70px;pointer-events:none;z-index:0;color:rgba(128,128,160,0.04)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag blue">Software · AI · Cyber</span><div class="bento-title">Technology &<br/>Engineering</div><p class="bento-body">Fokus pada Software Development, Cyber Security, dan Artificial Intelligence. Mengubah ide kompleks menjadi solusi digital inovatif yang siap bersaing di era modern.</p></div>
+            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag blue">Software · AI · Cyber</span><div class="bento-title">Technology &<br/>Engineering</div><p class="bento-body" data-id="Fokus pada Software Development, Cyber Security, dan Artificial Intelligence. Mengubah ide kompleks menjadi solusi digital inovatif yang siap bersaing di era modern." data-en="Focused on Software Development, Cyber Security, and Artificial Intelligence. Turning complex ideas into innovative digital solutions ready for the modern era.">Fokus pada Software Development, Cyber Security, dan Artificial Intelligence. Mengubah ide kompleks menjadi solusi digital inovatif yang siap bersaing di era modern.</p></div>
           </BorderGlow>
           <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
             <svg class="bento-bg-icon" style="position:absolute;top:1rem;right:1rem;width:70px;height:70px;pointer-events:none;z-index:0;color:rgba(128,128,160,0.04)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M2 4h20"/><path d="m2 4 4.5 16h11L22 4"/></svg>
-            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag chrome">Culture · Advocacy</span><div class="bento-title">Pageant &<br/>Culture</div><p class="bento-body">Platform untuk membangun advokasi sosial, melestarikan budaya Indonesia, dan memberikan dampak nyata bagi masyarakat.</p></div>
+            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag chrome">Culture · Advocacy</span><div class="bento-title">Pageant &<br/>Culture</div><p class="bento-body" data-id="Platform untuk membangun advokasi sosial, melestarikan budaya Indonesia, dan memberikan dampak nyata bagi masyarakat." data-en="A platform to build social advocacy, preserve Indonesian culture, and create real impact for society.">Platform untuk membangun advokasi sosial, melestarikan budaya Indonesia, dan memberikan dampak nyata bagi masyarakat.</p></div>
           </BorderGlow>
           <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="reveal">
             <svg class="bento-bg-icon" style="position:absolute;top:1rem;right:1rem;width:70px;height:70px;pointer-events:none;z-index:0;color:rgba(128,128,160,0.04)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag white">Org · Decision</span><div class="bento-title">Leadership</div><p class="bento-body">Memimpin organisasi mengajarkan bahwa leadership bukan soal posisi, melainkan keberanian mengambil keputusan dan menginspirasi.</p></div>
+            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag white">Org · Decision</span><div class="bento-title">Leadership</div><p class="bento-body" data-id="Memimpin organisasi mengajarkan bahwa leadership bukan soal posisi, melainkan keberanian mengambil keputusan dan menginspirasi." data-en="Leading organizations teaches that leadership isn't about position — it's about the courage to make decisions and inspire.">Memimpin organisasi mengajarkan bahwa leadership bukan soal posisi, melainkan keberanian mengambil keputusan dan menginspirasi.</p></div>
           </BorderGlow>
           <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="bento-wide reveal">
             <svg class="bento-bg-icon" style="position:absolute;top:1rem;right:1rem;width:70px;height:70px;pointer-events:none;z-index:0;color:rgba(128,128,160,0.04)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag chrome">MC · Moderator · Presenter</span><div class="bento-title">Public Speaking</div><p class="bento-body">Ide dan visi yang hebat memiliki dampak jauh lebih besar ketika disampaikan dengan energi, kejelasan, dan inspirasi. Saya merawat keyakinan itu di setiap panggung.</p></div>
+            <div style="padding:1.5rem;flex:1;display:flex;flex-direction:column;justify-content:flex-end"><span class="bento-tag chrome">MC · Moderator · Presenter</span><div class="bento-title">Public Speaking</div><p class="bento-body" data-id="Ide dan visi yang hebat memiliki dampak jauh lebih besar ketika disampaikan dengan energi, kejelasan, dan inspirasi. Saya merawat keyakinan itu di setiap panggung." data-en="Great ideas and visions have far greater impact when delivered with energy, clarity, and inspiration. I nurture that belief on every stage.">Ide dan visi yang hebat memiliki dampak jauh lebih besar ketika disampaikan dengan energi, kejelasan, dan inspirasi. Saya merawat keyakinan itu di setiap panggung.</p></div>
           </BorderGlow>
         </div>
       </div>
@@ -614,6 +670,81 @@ import SplashCursor from '../components/SplashCursor';
       </div>
     </section>
 
+    <!-- ====== WORKS ====== -->
+    <section id="works">
+      <div class="section-wrap">
+        <div class="reveal" style="text-align:center;margin-bottom:2.5rem">
+          <p class="section-eyebrow" style="justify-content:center">Selected Works</p>
+          <h2 class="section-heading" style="text-align:center">Websites I've<br/><em style="font-style:italic;color:var(--chrome);font-weight:500">Built & Shipped.</em></h2>
+        </div>
+        <div class="works-grid reveal">
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="work-wide work-item reveal">
+            <a href="#home" class="work-card" aria-label="Fatih Landing Page">
+              <div class="work-top"><span class="work-num">01.</span><span class="work-tag">Personal · You Are Here</span></div>
+              <div class="work-shot"><img src="/works/fatih-landing.png" alt="Tampilan Fatih Landing Page" width="1280" height="800" loading="lazy" decoding="async" /></div>
+              <div class="work-name">Fatih Landing Page</div>
+              <p class="work-desc" data-id="Website profil personal interaktif — halaman yang sedang kamu lihat ini." data-en="An interactive personal profile website — the page you're looking at right now.">Website profil personal interaktif — halaman yang sedang kamu lihat ini.</p>
+              <div class="work-foot"><span class="work-domain" data-id="Kembali ke atas" data-en="Back to top">Kembali ke atas</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></div>
+            </a>
+          </BorderGlow>
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="work-item reveal">
+            <a href="https://portfolio-fatih-fawn.vercel.app" target="_blank" rel="noopener" class="work-card">
+              <div class="work-top"><span class="work-num">02.</span><span class="work-tag">Portfolio</span></div>
+              <div class="work-shot"><img src="/works/portfolio-fatih.png" alt="Tampilan Fatih Portfolio" width="1280" height="800" loading="lazy" decoding="async" /></div>
+              <div class="work-name">Fatih Portfolio</div>
+              <p class="work-desc" data-id="Portofolio lengkap karya, proyek, dan pengalaman." data-en="A complete portfolio of works, projects, and experience.">Portofolio lengkap karya, proyek, dan pengalaman.</p>
+              <div class="work-foot"><span class="work-domain">portfolio-fatih-fawn.vercel.app</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></div>
+            </a>
+          </BorderGlow>
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="work-item reveal">
+            <a href="https://rintisnalar.vercel.app" target="_blank" rel="noopener" class="work-card">
+              <div class="work-top"><span class="work-num">03.</span><span class="work-tag">Education</span></div>
+              <div class="work-shot"><img src="/works/rintis.png" alt="Tampilan RINTIS Nalar Learning Center" width="1280" height="800" loading="lazy" decoding="async" /></div>
+              <div class="work-name">RINTIS Nalar Learning Center</div>
+              <p class="work-desc" data-id="Landing page learning center untuk edukasi & pengembangan diri." data-en="Learning center landing page for education & self-development.">Landing page learning center untuk edukasi & pengembangan diri.</p>
+              <div class="work-foot"><span class="work-domain">rintisnalar.vercel.app</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></div>
+            </a>
+          </BorderGlow>
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="work-item reveal">
+            <a href="https://strivindonesia.vercel.app" target="_blank" rel="noopener" class="work-card">
+              <div class="work-top"><span class="work-num">04.</span><span class="work-tag">Organization</span></div>
+              <div class="work-shot"><img src="/works/striv.png" alt="Tampilan STRIV" width="1280" height="800" loading="lazy" decoding="async" /></div>
+              <div class="work-name">STRIV</div>
+              <p class="work-desc" data-id="Landing page organisasi/kegiatan anak muda Indonesia." data-en="Landing page for an Indonesian youth organization.">Landing page organisasi/kegiatan anak muda Indonesia.</p>
+              <div class="work-foot"><span class="work-domain">strivindonesia.vercel.app</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></div>
+            </a>
+          </BorderGlow>
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="work-item reveal">
+            <a href="https://safirastore.vercel.app" target="_blank" rel="noopener" class="work-card">
+              <div class="work-top"><span class="work-num">05.</span><span class="work-tag">E-commerce</span></div>
+              <div class="work-shot"><img src="/works/safira.png" alt="Tampilan SAFIRA+" width="1280" height="800" loading="lazy" decoding="async" /></div>
+              <div class="work-name">SAFIRA+</div>
+              <p class="work-desc" data-id="Landing page toko online dengan fokus konversi." data-en="E-commerce landing page focused on conversion.">Landing page toko online dengan fokus konversi.</p>
+              <div class="work-foot"><span class="work-domain">safirastore.vercel.app</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></div>
+            </a>
+          </BorderGlow>
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="work-item reveal">
+            <a href="https://ppbsurabaya.vercel.app" target="_blank" rel="noopener" class="work-card">
+              <div class="work-top"><span class="work-num">06.</span><span class="work-tag">Culture</span></div>
+              <div class="work-shot"><img src="/works/ppb.png" alt="Tampilan Putera Puteri Batik Surabaya" width="1280" height="800" loading="lazy" decoding="async" /></div>
+              <div class="work-name">Putera Puteri Batik Surabaya</div>
+              <p class="work-desc" data-id="Landing page pelestarian budaya batik Surabaya." data-en="Landing page for preserving Surabaya batik culture.">Landing page pelestarian budaya batik Surabaya.</p>
+              <div class="work-foot"><span class="work-domain">ppbsurabaya.vercel.app</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></div>
+            </a>
+          </BorderGlow>
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="work-item reveal">
+            <a href="https://gamifikathink.vercel.app" target="_blank" rel="noopener" class="work-card">
+              <div class="work-top"><span class="work-num">07.</span><span class="work-tag">EdTech</span></div>
+              <div class="work-shot"><img src="/works/gamifikathink.png" alt="Tampilan GAMIFIKATHINK" width="1280" height="800" loading="lazy" decoding="async" /></div>
+              <div class="work-name">GAMIFIKATHINK</div>
+              <p class="work-desc" data-id="Platform gamifikasi pembelajaran yang seru & interaktif." data-en="A fun & interactive learning gamification platform.">Platform gamifikasi pembelajaran yang seru & interaktif.</p>
+              <div class="work-foot"><span class="work-domain">gamifikathink.vercel.app</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></div>
+            </a>
+          </BorderGlow>
+        </div>
+      </div>
+    </section>
+
     <!-- ====== LOCATION ====== -->
     <section id="location" class="section-wrap" style="text-align:center;display:flex;flex-direction:column;align-items:center">
       <div class="reveal">
@@ -644,13 +775,24 @@ import SplashCursor from '../components/SplashCursor';
 
     <!-- ====== FOOTER ====== -->
     <footer id="connect" class="footer">
-      <Balatro client:visible color1="#000000" color2="#004a9d" color3="#080f10" pixelFilter={700} mouseInteraction={true} isRotate={false} />
+      <Balatro client:visible color1="#000000" color2="#004a9d" color3="#080f10" lightColor1="#f5f4f0" lightColor2="#2d5fcc" lightColor3="#dfded8" pixelFilter={700} mouseInteraction={true} isRotate={false} />
       <div class="footer-glow" aria-hidden="true"></div>
       <div class="footer-line" aria-hidden="true"></div>
       <div class="reveal">
         <p class="footer-eyebrow">Let's Connect</p>
         <h2 class="footer-heading">Let's Create<span>Meaningful Impact.</span></h2>
-        <p class="footer-sub">Terbuka untuk kolaborasi seputar Technology, Leadership, Public Speaking, Education, dan Youth Development.</p>
+        <p class="footer-sub" data-id="Terbuka untuk kolaborasi seputar Technology, Leadership, Public Speaking, Education, dan Youth Development." data-en="Open to collaborations on Technology, Leadership, Public Speaking, Education, and Youth Development.">Terbuka untuk kolaborasi seputar Technology, Leadership, Public Speaking, Education, dan Youth Development.</p>
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <div class="contact-row">
+            <input type="text" id="cfName" required placeholder="Nama" data-ph-id="Nama" data-ph-en="Name" autocomplete="name" />
+            <input type="email" id="cfEmail" required placeholder="Email" autocomplete="email" />
+          </div>
+          <textarea id="cfMsg" required data-ph-id="Pesan…" data-ph-en="Message…"></textarea>
+          <button type="submit" class="btn-secondary">
+            <span class="cf-btn-text" data-id="Kirim via Email" data-en="Send via Email">Kirim via Email</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          </button>
+        </form>
         <div class="footer-actions">
           <a href="https://instagram.com/aftharmuhammad_" target="_blank" rel="noopener" class="btn-chrome">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
@@ -671,6 +813,76 @@ import SplashCursor from '../components/SplashCursor';
   </main>
 
   <script>
+    /* ===== CONTACT FORM (mailto) ===== */
+    var CONTACT_EMAIL=''; /* ← isi email tujuan di sini, mis. 'nama@gmail.com' */
+    (function(){
+      var f=document.getElementById('contactForm');
+      if(!f)return;
+      var btnText=f.querySelector('.cf-btn-text');
+      f.addEventListener('submit',function(e){
+        e.preventDefault();
+        if(!f.checkValidity()){f.reportValidity();return;}
+        if(!CONTACT_EMAIL){
+          btnText.textContent='Set CONTACT_EMAIL dulu';
+          setTimeout(function(){btnText.textContent='Kirim via Email';},2500);
+          return;
+        }
+        var nama=document.getElementById('cfName').value.trim();
+        var dari=document.getElementById('cfEmail').value.trim();
+        var pesan=document.getElementById('cfMsg').value.trim();
+        var subj=encodeURIComponent('[Website] Halo Fatih — pesan dari '+nama);
+        var body=encodeURIComponent('Nama: '+nama+'\nEmail: '+dari+'\n\n'+pesan+'\n');
+        location.href='mailto:'+CONTACT_EMAIL+'?subject='+subj+'&body='+body;
+      });
+    })();
+
+    /* ===== PRELOADER ===== */    (function(){
+      var pre=document.getElementById('preloader');
+      if(!pre)return;
+      var bar=document.getElementById('preBar'),count=document.getElementById('preCount');
+      var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function finish(){
+        pre.classList.add('done');
+        setTimeout(function(){pre.remove();},700);
+      }
+      if(reduced){finish();return;}
+      var loaded=false,pct=0;
+      window.addEventListener('load',function(){loaded=true;pct=Math.max(pct,92);});
+      var t0=performance.now();
+      (function tick(){
+        var elapsed=performance.now()-t0;
+        var target=loaded?100:Math.min(90,elapsed*0.08);
+        pct+=(target-pct)*0.15;
+        var shown=Math.min(100,Math.round(pct));
+        bar.style.width=shown+'%';
+        count.textContent=shown+'%';
+        if(shown>=100&&loaded){finish();return;}
+        requestAnimationFrame(tick);
+      })();
+    })();
+
+    /* ===== I18N (ID/EN) ===== */
+    (function(){
+      var html=document.documentElement,btn=document.getElementById('dockLang');
+      function apply(lang){
+        var en=lang==='en';
+        document.querySelectorAll('[data-en],[data-id]').forEach(function(el){
+          var id=el.getAttribute('data-id'),vs=el.getAttribute('data-en');
+          el.innerHTML=en?(vs||id):(id||vs);
+        });
+        document.querySelectorAll('[data-ph-en]').forEach(function(el){
+          el.placeholder=en?el.getAttribute('data-ph-en'):el.getAttribute('data-ph-id');
+        });
+        if(btn){btn.classList.toggle('lang-active',en);btn.textContent=en?'EN':'ID';}
+        html.setAttribute('lang',en?'en':'id');
+        localStorage.setItem('lang',lang);
+      }
+      apply(localStorage.getItem('lang')||'id');
+      if(btn)btn.addEventListener('click',function(){
+        apply(html.getAttribute('lang')==='en'?'id':'en');
+      });
+    })();
+
     /* ===== SMOOTH SCROLL ===== */
     function smoothScrollTo(targetEl){
       var targetY=targetEl.getBoundingClientRect().top+window.scrollY;

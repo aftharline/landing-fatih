@@ -111,6 +111,9 @@ export default function Balatro({
   color1 = '#DE443B',
   color2 = '#006BB4',
   color3 = '#162325',
+  lightColor1,
+  lightColor2,
+  lightColor3,
   contrast = 3.5,
   lighting = 0.4,
   spinAmount = 0.25,
@@ -170,6 +173,23 @@ export default function Balatro({
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    let mo = null;
+    if (lightColor1 && lightColor2 && lightColor3) {
+      const palettes = {
+        dark: [hexToVec4(color1), hexToVec4(color2), hexToVec4(color3)],
+        light: [hexToVec4(lightColor1), hexToVec4(lightColor2), hexToVec4(lightColor3)]
+      };
+      const applyTheme = () => {
+        const pal = document.documentElement.getAttribute('data-theme') === 'light' ? palettes.light : palettes.dark;
+        program.uniforms.uColor1.value = pal[0];
+        program.uniforms.uColor2.value = pal[1];
+        program.uniforms.uColor3.value = pal[2];
+      };
+      applyTheme();
+      mo = new MutationObserver(applyTheme);
+      mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    }
+
     function startLoop() {
       function update(time) {
         if (!isVisible.current) {
@@ -218,6 +238,7 @@ export default function Balatro({
       rafRef.current = null;
       window.removeEventListener('resize', resize);
       container.removeEventListener('mousemove', handleMouseMove);
+      if (mo) mo.disconnect();
       io.disconnect();
       if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
