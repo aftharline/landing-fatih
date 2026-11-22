@@ -244,10 +244,11 @@ import SplashCursor from '../components/SplashCursor';
     .skill-tag:hover{border-color:rgba(128,128,160,0.25);color:var(--chrome);background:var(--chrome-dim)}
 
     /* ===== WORKS ===== */
-    .works-grid{display:grid;grid-template-columns:1fr;gap:0.75rem}
-    .works-grid :global(.work-item){display:flex}
-    .works-grid :global(.work-item .border-glow-inner){display:flex;width:100%}
-    .works-grid :global(.work-item .work-card){flex:1;display:flex;flex-direction:column;padding:1.5rem;text-decoration:none;position:relative}
+    .works-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:0.75rem}
+    .works-grid :global(.work-item){display:flex;min-width:0;max-width:100%}
+    .works-grid :global(.work-item .border-glow-card){min-width:0;max-width:100%}
+    .works-grid :global(.work-item .border-glow-inner){display:flex;width:100%;min-width:0}
+    .works-grid :global(.work-item .work-card){flex:1;min-width:0;width:100%;display:flex;flex-direction:column;padding:1.5rem;text-decoration:none;position:relative;border-radius:inherit}
     .work-card::before{content:'';position:absolute;inset:0;background:var(--card-over);pointer-events:none}
     .work-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
     .work-num{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--blue)}
@@ -255,12 +256,13 @@ import SplashCursor from '../components/SplashCursor';
     .works-grid :global(.border-glow-card:hover) .work-tag{color:var(--blue);border-color:rgba(77,138,255,0.3);background:var(--blue-dim)}
     .work-name{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:0.5rem;letter-spacing:-0.015em;transition:color 0.3s ease}
     .work-desc{font-size:0.82rem;color:var(--muted);line-height:1.6;font-weight:300;margin-bottom:1.25rem}
-    .work-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:0.75rem}
-    .work-domain{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.02em;color:var(--muted-2);transition:color 0.3s ease;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .work-arrow{width:16px;height:16px;min-width:16px;color:var(--muted-2);transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1)}
+    .work-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:0.75rem;min-width:0}
+    .work-domain{min-width:0;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.02em;color:var(--muted-2);transition:color 0.3s ease;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .work-arrow{width:16px;height:16px;min-width:16px;flex-shrink:0;color:var(--muted-2);transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1)}
     .works-grid :global(.border-glow-card:hover) .work-arrow{color:var(--blue);transform:translate(3px,-3px)}
     .works-grid :global(.border-glow-card:hover) .work-domain{color:var(--blue)}
-    .works-grid :global(.work-wide){grid-column:span 2}
+    .work-name,.work-desc{overflow-wrap:anywhere}
+    .works-grid :global(.work-wide){grid-column:auto}
     .work-shot{border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:1.1rem;aspect-ratio:16/10;background:var(--surface-2)}
     .work-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform 0.5s cubic-bezier(0.25,1,0.5,1)}
     .works-grid :global(.border-glow-card:hover) .work-shot img{transform:scale(1.04)}
@@ -318,7 +320,8 @@ import SplashCursor from '../components/SplashCursor';
       .bento-card{padding:1.75rem}.bento-bg-icon{width:90px;height:90px}
       .bento-title{font-size:1.6rem}.bento-wide .bento-title{font-size:2rem}
       .skills-grid{grid-template-columns:1fr 1fr}
-      .works-grid{grid-template-columns:1fr 1fr}
+      .works-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+      .works-grid :global(.work-wide){grid-column:span 2}
       .music-panel{width:260px}
     }
 
@@ -739,6 +742,15 @@ import SplashCursor from '../components/SplashCursor';
               <div class="work-name">GAMIFIKATHINK</div>
               <p class="work-desc" data-id="Platform gamifikasi pembelajaran yang seru & interaktif." data-en="A fun & interactive learning gamification platform.">Platform gamifikasi pembelajaran yang seru & interaktif.</p>
               <div class="work-foot"><span class="work-domain">gamifikathink.vercel.app</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></div>
+            </a>
+          </BorderGlow>
+          <BorderGlow client:visible backgroundColor="var(--surface)" borderRadius={20} glowIntensity={0.5} edgeSensitivity={40} glowRadius={16} colors={['#b0b0c4', '#4d8aff', '#787890']} className="work-item reveal">
+            <a href="https://prasetyajourney.vercel.app/" target="_blank" rel="noopener" class="work-card">
+              <div class="work-top"><span class="work-num">08.</span><span class="work-tag">Travel</span></div>
+              <div class="work-shot"><img src="/works/prasetyajourney.svg" alt="Tampilan Prasetya Journey" width="1280" height="800" loading="lazy" decoding="async" /></div>
+              <div class="work-name">Prasetya Journey</div>
+              <p class="work-desc" data-id="Website perjalanan berisi cerita dan dokumentasi perjalanan." data-en="A travel website featuring journey stories and documentation.">Website perjalanan berisi cerita dan dokumentasi perjalanan.</p>
+              <div class="work-foot"><span class="work-domain">prasetyajourney.vercel.app</span><svg class="work-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></div>
             </a>
           </BorderGlow>
         </div>
